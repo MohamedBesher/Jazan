@@ -1,0 +1,182 @@
+﻿@model Saned.Jazan.Data.Core.Models.CulturalCompetitionQuestion
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    @*@Html.Partial("_Flash")*@
+
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+
+            <small> تفاصيل الاعلان</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-dashboard"></i>الرئيسية
+                </a>
+            </li>
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Competition")">
+                    <i class="fa fa-trophy"></i>المسابقات الثقافية
+                </a>
+            </li>
+            <li class="active">تفاصيل المسابقة الثقافية</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="row">
+                        <div class="box-header">
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title">
+                                    عرض تفاصيل المسابقة الثقافية
+                                </h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title pull-right">
+
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#details">بيانات المسابقة الثقافية</a></li>
+
+                            <li><a data-toggle="tab" href="#Users"> المشتركين</a></li>
+                            @*<li><a data-toggle="tab" href="#Comments">التعليقات</a></li>*@
+
+                        </ul>
+
+                        <div class="tab-content">
+                <div id="details" class="tab-pane fade in active">
+                <div id="Ads-Details">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+
+                            <div class="col-xs-6">
+                                <div class="box-body">
+
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.Title)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Title)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.Question)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Question)
+                                        </dd>
+                                                                 
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CreatedOn)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CreatedOn)
+                                        </dd>
+
+                                        
+
+                                    </dl>
+
+                                </div>
+                            </div>
+                                            
+
+                        </div>
+                    </div><!-- /.box-header -->
+
+
+
+
+                </div>
+            </div>
+                    
+                    <div id="Users" class="tab-pane fade">
+                                        
+                        <div id="Ads-Comments" class="box-header with-border">
+                            @Html.Action("_GetUsersByQuestionId", new { Id = Model.Id, PageIndex = 1 })
+
+
+                        </div>
+                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+
+
+
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

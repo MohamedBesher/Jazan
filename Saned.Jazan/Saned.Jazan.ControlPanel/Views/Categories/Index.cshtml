@@ -1,0 +1,186 @@
+﻿@using Kendo.Mvc.UI
+@using Saned.Jazan.Data.Core.Models
+@model Saned.Jazan.ControlPanel.ViewModels.CategorySearchModel
+@{
+    ViewBag.Title = "التصنيفات";
+    var photo = new Saned.Jazan.Data.Core.Models.NewsImage();
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        //Confirm = "Are you sure to start search?",
+        InsertionMode = InsertionMode.Replace,
+       // LoadingElementId = "ajaxLoaderDiv"
+        LoadingElementId = "ajaxLoaderDiv"
+    };
+
+}
+<div class="content-wrapper">
+    @Html.Partial("_Flash")
+
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+
+            <small>التصنيفات </small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a onclick="showPageLoadingSpinner()" href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i>الرئيسية</a></li>
+            <li class="active">  <i class="glyphicon glyphicon-tags"></i>التصنيفات  </li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="row">
+                        <div class="box-header">
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title">
+                                    عرض قائمةالتصنيفات
+                                </h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title pull-right">
+                                    <a onclick="showPageLoadingSpinner()" href="@Url.Action("Category", "Categories")" type="button" class="btn btn-success">  التصنيفات الرئيسية</a>
+                                    <a onclick="showPageLoadingSpinner()" href="@Url.Action("AddSubCategory", "Categories")" type="button" class="btn btn-success"> إضافة تصنيف فرعي</a>
+
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+
+                        @using (Ajax.BeginForm("Search", options))
+                        {
+                            <form role="form">
+                                <div class="input-group">
+
+                                    @*@(Html.Kendo().AutoComplete()
+.Name("CategoryId")
+.DataTextField("CategoryNameAr")
+ //Specify which property of the Product to be used by the AutoComplete.
+.DataSource(source =>
+{
+    source.Read(read =>
+    {
+        read.Action("GetMainCategories", "Categories"); //Set the Action and Controller names.
+    })
+    .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+})
+                                          )*@
+                                
+                                
+                                
+                                
+                                        @(Html.Kendo().ComboBox()
+                                        .Name("CategoryId")
+                                        .Filter("contains")
+                                        .Placeholder("اختر التصنيف الرئيسى")
+                                        .DataTextField("CategoryNameAr")
+                                        .DataValueField("CategoryId")
+                                        .DataSource(source =>
+                                        {
+                                        source.Read(read =>
+                                        {
+                                        read.Action("GetMainCategories", "Categories"); //Set the Action and Controller names.
+                                        })
+                                        .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+                                        })
+          
+                                        
+                                        .Suggest(true)
+                                        .HtmlAttributes(new { style = "width:100%;" })
+                                                                            )
+
+
+
+
+                                    <span class="input-group-btn">
+                                            <button class="btn btn-success" type="submit">بحث </button>
+                                        </span>
+
+
+                                </div><!-- /input-group -->
+
+
+                            </form>
+
+
+
+
+
+
+
+
+}
+                        <div id="searchResult">
+
+                            @Html.Action("Search", new { CategoryId = 0, page = 1 })
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+<script>
+    
+    function ChangePageSize(bt) {
+        $('#form0').submit();
+    }
+</script>
+
+
+<style>
+    .dropdown-header {
+        border-width: 0 0 1px 0;
+        text-transform: uppercase;
+    }
+
+        .dropdown-header > span {
+            display: inline-block;
+            padding: 10px;
+        }
+
+            .dropdown-header > span:first-child {
+                width: 50px;
+            }
+
+    .selected-value {
+        display: inline-block;
+        vertical-align: middle;
+        width: 18px;
+        height: 18px;
+        background-size: 100%;
+        margin-left: 5px;
+        border-radius: 50%;
+    }
+
+    .ads {
+        display: inline-block;
+        vertical-align: middle;
+        width: 50px;
+        height: 50px;
+        background-size: 100%;
+        margin-right: 5px;
+        border-radius: 50%;
+    }
+
+    #Advertisements-list .k-item {
+        line-height: 1em;
+        min-width: 300px;
+    }
+
+    
+</style>

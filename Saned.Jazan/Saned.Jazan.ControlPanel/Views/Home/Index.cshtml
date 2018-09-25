@@ -1,0 +1,189 @@
+﻿@using System.Web.UI.WebControls
+@{
+
+    ViewBag.Title = "الأعلانات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+<div class="content-wrapper">
+
+    @Html.Partial("_Flash")
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+
+            <small>الرئيسية</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-dashboard"></i>الرئيسية
+                </a>
+            </li>
+
+
+          
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="row">
+                        <div class="box-header">
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title">
+                                    الرئيسية
+                                </h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title pull-right"></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>@ViewBag.approvedUsers</h3>
+                                    <p>المستخدمين المفعلين</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <a href="@Url.Action("Index","Users")" class="small-box-footer">المزيد <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>@ViewBag.approvedAdvertisements</h3>
+                                    <p> الاعلانات المفعلة </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-buysellads"></i>
+                                </div>
+                                <a href="@Url.Action("Index","Advertisement")" class="small-box-footer">المزيد <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h3>@ViewBag.approvedTouristVisits</h3>
+                                    <p>الزيارات المفعلة</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-tripadvisor"></i>
+                                </div>
+                                <a href="@Url.Action("Index","TouristVisit")" class="small-box-footer">المزيد <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>@ViewBag.approvedCompetitionQuestion</h3>
+                                    <p>المسابقات المفعلة</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-trophy"></i>
+                                </div>
+                                <a href="@Url.Action("Index","Competition")" class="small-box-footer">المزيد <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div><!-- ./col -->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-LawnGreen">
+                                <div class="inner">
+                                    <h3>@ViewBag.unapprovedUsers</h3>
+                                    <p>المستخدمين الغير مفعلين</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <a href="@Url.Action("Index","Users")" class="small-box-footer">المزيد <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-Fuchsia ">
+                                <div class="inner">
+                                    <h3>@ViewBag.unapprovedAdvertisements</h3>
+                                    <p>الاعلانات الغير مفعلة</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-buysellads"></i>
+                                </div>
+                                <a href="@Url.Action("Index","Advertisement")" class="small-box-footer">المزيد <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-DarkOrange">
+                                <div class="inner">
+                                    <h3> @ViewBag.unapprovedTouristVisits</h3>
+                                    <p>الزيارات الغير مفعلة</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-tripadvisor"></i>
+                                </div>
+                                <a href="@Url.Action("Index","TouristVisit")" class="small-box-footer">المزيد <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-DarkOrchid">
+                                <div class="inner">
+                                    <h3>@ViewBag.unapprovedCompetitionQuestion</h3>
+                                    <p>المسابقات الغير مفعلة</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-trophy"></i>
+                                </div>
+                                <a href="@Url.Action("Index","Competition")" class="small-box-footer">المزيد <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div><!-- ./col -->
+                    </div>
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+
+        <!-- /.row -->
+    </section>
+
+    <!-- /.content -->
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

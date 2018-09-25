@@ -1,0 +1,138 @@
+﻿@model Saned.Jazan.Data.Core.Models.Feature
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions options = new AjaxOptions
+    {
+        OnSuccess = "OnSuccess_SaveFeature()",
+        OnFailure = "onFailure_SaveFeature()"
+    };
+}
+
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <h1>
+            <small> تفاصيل الميزة</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-dashboard"></i>الرئيسية
+                </a>
+            </li>
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Package")">
+                    <i class="fa fa-briefcase"></i>الميزات
+                </a>
+            </li>
+            <li class="active">تفاصيل الميزة</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="row">
+                        <div class="box-header">
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title">
+                                    عرض تفاصيل الميزة
+                                </h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title pull-right"></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div>
+                        <div id="Ads-Details">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+
+                                    <div class="col-xs-12">
+                                        
+                                        <div class="box-body">
+                                            @using (Ajax.BeginForm("Edit", options))
+                                            {
+                                                <dl class="dl-horizontal">
+                                                    @Html.HiddenFor(model => model.Id)
+
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.ArabicName)
+                                                    </dt>
+                                                    <dd>
+                                                        @Html.TextBoxFor(model => model.ArabicName)
+                                                        @Html.ValidationMessageFor(model => model.ArabicName,null,new {@class="danger"})
+
+
+                                                    </dd>
+
+                                                    @*<dt>
+                                    @Html.DisplayNameFor(model => model.EnglishName)
+                                </dt>
+
+                                <dd>
+                                    @Html.TextBoxFor(model => model.EnglishName)
+                                    @Html.ValidationMessageFor(model => model.EnglishName)
+
+                                </dd>*@
+                                
+
+                                                </dl>
+
+                                                <button type="submit" class="btn btn-success pull-right"><i class="glyphicon glyphicon-floppy-disk"></i>حفظ</button>
+
+                                            }
+                                        </div>
+
+                                    </div>
+                                    
+                                    <!-- /.box-body -->
+                                </div>
+                            </div><!-- /.box-header -->
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+<script >
+    
+
+    function OnSuccess_SaveFeature(data) {
+
+        NotificationService.displaySuccess("تم التعديل بنجاح");
+        window.location.href = "/Feature";
+    }
+    function onFailure_SaveFeature(data) {
+
+        NotificationService.displayError("حدث خطأ أثناء التعديل .");
+    }
+</script>

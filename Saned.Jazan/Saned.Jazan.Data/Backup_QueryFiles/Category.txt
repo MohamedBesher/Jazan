@@ -1,0 +1,57 @@
+        public override void Up()
+        {
+            //AddColumn("dbo.Categories", "CategoryNameAr", c => c.String(nullable: false, maxLength: 400));
+            //AddColumn("dbo.Categories", "CategoryNameEn", c => c.String(nullable: false, maxLength: 400));
+            //DropColumn("dbo.Categories", "CategoryName");
+            //AlterStoredProcedure(
+            //    "dbo.Category_Insert",
+            //    p => new
+            //        {
+            //            CategoryNameAr = p.String(maxLength: 400),
+            //            CategoryNameEn = p.String(maxLength: 400),
+            //            CategoryImage = p.String(maxLength: 36),
+            //            ParentId = p.Int(),
+            //            Status = p.Byte(),
+            //            CreateDate = p.DateTime(),
+            //        },
+            //    body:
+            //        @"INSERT [dbo].[Categories]([CategoryNameAr], [CategoryNameEn], [CategoryImage], [ParentId], [Status], [CreateDate])
+            //          VALUES (@CategoryNameAr, @CategoryNameEn, @CategoryImage, @ParentId, @Status, @CreateDate)
+                      
+            //          DECLARE @CategoryId int
+            //          SELECT @CategoryId = [CategoryId]
+            //          FROM [dbo].[Categories]
+            //          WHERE @@ROWCOUNT > 0 AND [CategoryId] = scope_identity()
+                      
+            //          SELECT t0.[CategoryId]
+            //          FROM [dbo].[Categories] AS t0
+            //          WHERE @@ROWCOUNT > 0 AND t0.[CategoryId] = @CategoryId"
+            //);
+            
+            //AlterStoredProcedure(
+            //    "dbo.Category_Update",
+            //    p => new
+            //        {
+            //            CategoryId = p.Int(),
+            //            CategoryNameAr = p.String(maxLength: 400),
+            //            CategoryNameEn = p.String(maxLength: 400),
+            //            CategoryImage = p.String(maxLength: 36),
+            //            ParentId = p.Int(),
+            //            Status = p.Byte(),
+            //            CreateDate = p.DateTime(),
+            //        },
+            //    body:
+            //        @"UPDATE [dbo].[Categories]
+            //          SET [CategoryNameAr] = @CategoryNameAr, [CategoryNameEn] = @CategoryNameEn, [CategoryImage] = @CategoryImage, [ParentId] = @ParentId, [Status] = @Status, [CreateDate] = @CreateDate
+            //          WHERE ([CategoryId] = @CategoryId)"
+            //);
+            
+        }
+        
+        public override void Down()
+        {
+            //AddColumn("dbo.Categories", "CategoryName", c => c.String(nullable: false, maxLength: 400));
+            //DropColumn("dbo.Categories", "CategoryNameEn");
+            //DropColumn("dbo.Categories", "CategoryNameAr");
+            //throw new NotSupportedException("Scaffolding create or alter procedure operations is not supported in down methods.");
+        }

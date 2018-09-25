@@ -1,0 +1,186 @@
+﻿@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+@model PagedList.IPagedList<Saned.Jazan.Data.Core.Models.ApplicationUser>
+<div class="box-body">
+
+    @if (Model.Count > 0)
+    {
+        <label class="col-xs-12">عدد المستخدمين  :  @ViewBag.ResultCount </label>
+        <div class="box-body table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>م</th>
+
+                        <th>صورة المستخدم</th>
+                        <th>اسم المستخدم</th>
+                        <th>الاسم</th>
+                        <th>رقم الهاتف</th>
+                        <th>البريد الالكترونى</th>
+                        <th>الاعدادات</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int counter = 0;}
+                    @foreach (var user in Model)
+                {
+                    counter++;
+                <tr>
+                    <td>@counter</td>
+                    <td>
+                        <img src="@(ViewBag.FrontEndUrl + "" + user.PhotoUrl)" onerror="this.onerror = null;this.src = '/Content/dist/img/noimagedefault.jpg'" class="img-circle" width="50" height="50" />
+                    </td>
+                    <td>@user.UserName</td>
+                    <td>@user.Name</td>
+                    <td>@(user.PhoneNumber ?? "-------")</td>
+                    <td>@(user.Email ?? "-------")</td>
+                    <td>
+                        @*<a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("Edit", "Feature", new {id = feature.Id}))" class="btn btn-primary"><i title="تعديل" class="fa fa-edit"></i></a>*@
+
+
+                        @{
+                                if (user.IsApprove.Value)
+                                {
+
+                            @Ajax.RawActionLink(string.Format("<i title='تفعيل الحساب' class='glyphicon glyphicon-remove'></i>"),
+                            "UnApprove", "Users",
+                            new { Id = user.Id },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "POST",
+                                LoadingElementId = "ajaxLoaderDiv",
+                                OnSuccess = "onsuccessUnApprove($(this),data)",
+                                OnFailure = "onFailureUnApprove()"
+                            }, new { @class = "btn btn-danger" });
+                                }
+                                else
+                                {
+                            @Ajax.RawActionLink(string.Format("<i title='الغاء تفعيل الحساب' class='glyphicon glyphicon-ok'></i>"),
+                            "Approve", "Users",
+                            new { Id = user.Id },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "POST",
+                                LoadingElementId = "ajaxLoaderDiv",
+                                OnSuccess = "onsuccessApprove($(this),data)",
+                                OnFailure = "onFailureApprove()"
+                            }, new { @class = "btn btn-success" });
+                                }
+
+                                
+
+                            
+                               
+                            <a title="تفاصيل" href="@(Url.Action("Details", "Users", new {id = user.Id}))" class="btn btn-primary"><i title="تفاصيل" class="glyphicon glyphicon-list-alt"></i></a>
+
+                            @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                                            "Delete", "Users",
+                                            new { Id = user.Id, Page = ViewBag.Page, Keyword = ViewBag.keyword },
+                                            new AjaxOptions
+                                            {
+                                                Confirm = "هل انت متأكد انك تريد حذف المستخدم ؟",
+                                                UpdateTargetId = "searchResult",
+                                                InsertionMode = InsertionMode.Replace,
+                                                HttpMethod = "POST",
+                                                LoadingElementId = "ajaxLoaderDiv",
+                                                OnSuccess = "onsuccessDeletion",
+                                                OnFailure = "onFailureDeletion"
+                                            },
+                                            new { @class = "btn btn-danger" })
+                        }
+                    </td>
+                </tr>
+                                }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model,
+        page => Url.Action("Search", new { page = page, keyword = ViewBag.keyword }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv", OnSuccess = "pagingSuccess" }))
+
+        </div>
+        <script>
+            function onsuccessDeletion(data, textStatus, jqXHR) {
+
+                NotificationService.displaySuccess("تم الحذف بنجاح");
+                initPrettyPhoto();
+    }
+    function onFailureDeletion(jqXHR,textStatus,errorThrown) {
+
+        if (jqXHR.statusText == "NotFound")
+            NotificationService.displayError("هذا المستخدم غير موجود");
+
+        else if (jqXHR.statusText == "NotDeleted")
+            NotificationService.displayError("حدث خطأ أثناء الحذف .");
+
+        else if (jqXHR.statusText == "UnableToDelete")
+            NotificationService.displayError("هذا المستخدم مرتبط بإعلانات , الرجاء حذف إعلانات المستخدم أولا .");
+        else
+            NotificationService.displayError("حدث خطأ أثناء الحذف .");
+
+
+    }
+
+    function onsuccessApprove(btn, data) {
+        if (data.message === "Approved") {
+            btn.html("<i title='الغاء الموافقة' class='glyphicon glyphicon-remove'></i>");
+            var fail = btn.attr('data-ajax-failure').replace('Approve', 'UnApprove');
+            var success = btn.attr('data-ajax-success').replace('Approve', 'UnApprove');
+            btn.attr('data-ajax-failure', fail);
+            btn.attr('data-ajax-success', success);
+
+            var path = btn.attr('href').replace('Approve', 'UnApprove');
+            btn.attr('href', path);
+
+
+            btn.removeClass('btn-success');
+            btn.addClass('btn-danger');
+            NotificationService.displaySuccess("تم الموافقة بنجاح");
+        }
+        else if (data.message === "NotFound") {
+            NotificationService.displayError("هذا الأعلان غير موجود .");
+        }
+        else
+            NotificationService.displayError("حدث خطأ أثناء الموافقة .");
+
+
+    }
+    function onFailureApprove() {
+        NotificationService.displayError("حدث خطأ أثناء الموافقة .");
+
+    }
+    function onsuccessUnApprove(btn, data) {
+        if (data.message === "UnApproved") {
+            btn.html("<i title='الموافقة' class='glyphicon glyphicon-ok'></i>");
+            var path = btn.attr('href').replace('UnApprove', 'Approve');
+            btn.attr('href', path);
+            var fail = btn.attr('data-ajax-failure').replace('UnApprove', 'Approve');
+            var success = btn.attr('data-ajax-success').replace('UnApprove', 'Approve');
+            btn.attr('data-ajax-failure', fail);
+            btn.attr('data-ajax-success', success);
+
+            btn.removeClass('btn-danger');
+            btn.addClass('btn-success');
+            NotificationService.displaySuccess("تم الغاء الموافقة بنجاح");
+        }
+        else if (data.message === "NotFound")
+            NotificationService.displayError("هذا الأعلان غير موجود .");
+        else
+            NotificationService.displayError("حدث خطأ أثناء الغاء الموافقة .");
+    }
+    function onFailureUnApprove(btn) {
+        NotificationService.displayError("حدث خطأ أثناء الغاء الموافقة .");
+
+    }
+
+
+        </script>
+                            }
+
+
+
+</div>
+
+
+
+

@@ -1,0 +1,91 @@
+﻿@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+@model PagedList.IPagedList<Saned.Jazan.Data.Core.Models.ApplicationUser>
+
+<label class="col-xs-12">عدد الباقات :  @ViewBag.ResultCount </label>
+<div class="box-body table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>م</th>           
+            <th>اسم المستخدم</th>
+            <th>الاسم</th>
+            <th>رقم الهاتف</th>
+            <th>البريد الالكترونى</th>
+            <th>الاعدادات</th>
+           
+        </tr>
+        </thead>
+        <tbody>
+        @{int counter = 0;}
+        @foreach (var user in Model)
+        {
+            counter++;
+            <tr>
+                <td>@counter</td>
+                <td>
+                    <img src="@(ViewBag.FrontEndUrl + "" + user.PhotoUrl)" onerror="this.onerror = null;this.src = '/Content/dist/img/noimagedefault.jpg'" width="100"/>
+                </td>
+                <td>@user.UserName</td>
+                <td>@user.Name</td>
+                <td>@(user.PhoneNumber?? "-------")</td>             
+                <td>@(user.Email?? "-------")</td>             
+                <td>
+                    <a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("Edit", "Feature", new {id = feature.Id}))" class="btn btn-primary"><i title="تعديل" class="fa fa-edit"></i></a>
+                    
+
+                    @{
+                        if (user.IsApprove.Value)
+                        {
+                            @Ajax.RawActionLink(string.Format("<i title='الغاء الموافقة' class='glyphicon glyphicon-remove'></i>"),
+                            "UnApprove", "User",
+                            new { Id = user.Id },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "POST",
+                                LoadingElementId = "divLoading",
+                                OnSuccess = "onsuccessUnApprove($(this),data)",
+                                OnFailure = "onFailureUnApprove()"
+                            },new { @class = "btn btn-danger" });
+                        }
+                        else
+                        {
+                            @Ajax.RawActionLink(string.Format("<i title='الموافقة' class='glyphicon glyphicon-ok'></i>"),
+                            "Approve", "User",
+                            new { Id = user.Id },
+                            new AjaxOptions
+                            {
+                            HttpMethod = "POST",
+                            LoadingElementId = "divLoading",
+                            OnSuccess = "onsuccessApprove($(this),data)",
+                            OnFailure = "onFailureApprove()"
+                            },new { @class = "btn btn-success" });
+                        }
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model,
+        page => Url.Action("Search", new { page =page, keyword = ViewBag.keyword }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "divLoading" }))
+
+</div>
+<script>
+    function onsuccessDeletion(data) {
+
+        NotificationService.displaySuccess("تم الحذف بنجاح");
+    }
+    function onFailureDeletion(data) {
+
+        NotificationService.displayError("حدث خطأ أثناء الحذف .");
+    }
+   
+    
+   
+</script>
+
+
+
+

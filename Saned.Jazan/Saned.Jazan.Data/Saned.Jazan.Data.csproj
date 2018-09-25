@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7B9FBB9-6431-43FB-BCED-6AF97FBE50A2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Saned.Jazan.Data</RootNamespace>
+    <AssemblyName>Saned.Jazan.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Saned.Common.Comments, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Saned.Common.Comments.dll</HintPath>
+    </Reference>
+    <Reference Include="Saned.Common.Notification, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Saned.Common.Notification.dll</HintPath>
+    </Reference>
+    <Reference Include="Saned.Common.Rating, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Saned.Common.Rating.dll</HintPath>
+    </Reference>
+    <Reference Include="Saned.Common.Views, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Saned.Common.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TemplateBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TemplateBuilder.1.1.3\lib\TemplateBuilder.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Z.EntityFramework.Plus.EF6, Version=1.4.48.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Plus.EF6.1.4.48\lib\net45\Z.EntityFramework.Plus.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Dtos\Advertisements_Packages_SelectAll_Result.cs" />
+    <Compile Include="Core\Dtos\AdvertisementViewModel.cs" />
+    <Compile Include="Core\Dtos\Advertisement_SelectById_Result.cs" />
+    <Compile Include="Core\Dtos\Advertisement_SelectSummaryCount_Result.cs" />
+    <Compile Include="Core\Dtos\CategoryDtos.cs" />
+    <Compile Include="Core\Dtos\CulturalCompetitionQuestionDto.cs" />
+    <Compile Include="Core\Dtos\CulturalCompetitionQuestionSponsorsDto.cs" />
+    <Compile Include="Core\Dtos\MobileSettingDto.cs" />
+    <Compile Include="Core\Dtos\NewsDto.cs" />
+    <Compile Include="Core\Dtos\PackageDto.cs" />
+    <Compile Include="Core\Dtos\PackageFeaturesDto.cs" />
+    <Compile Include="Core\Dtos\AdvertisementDto.cs" />
+    <Compile Include="Core\Dtos\RegisterDataDto.cs" />
+    <Compile Include="Core\Dtos\TouristVisit_SelectByIdResult.cs" />
+    <Compile Include="Core\Dtos\TouristVisit_SelectPagedResult.cs" />
+    <Compile Include="Core\Dtos\WinnerUserDto.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Models\Advertisement.cs" />
+    <Compile Include="Core\Models\AdvertisementFeature.cs" />
+    <Compile Include="Core\Models\AdvertisementImage.cs" />
+    <Compile Include="Core\Models\ApplicationTypes.cs" />
+    <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\CulturalCompetitionQuestionSponsor.cs" />
+    <Compile Include="Core\Models\Base\IEntityBase.cs" />
+    <Compile Include="Core\Models\Category.cs" />
+    <Compile Include="Core\Models\Client.cs" />
+    <Compile Include="Core\Models\ContactUs.cs" />
+    <Compile Include="Core\Models\CulturalCompetitionQuestion.cs" />
+    <Compile Include="Core\Models\CulturalCompetitionAnswer.cs" />
+    <Compile Include="Core\Models\EmailSetting.cs" />
+    <Compile Include="Core\Models\Feature.cs" />
+    <Compile Include="Core\Models\News.cs" />
+    <Compile Include="Core\Models\NewsImage.cs" />
+    <Compile Include="Core\Models\Package.cs" />
+    <Compile Include="Core\Models\PackageFeature.cs" />
+    <Compile Include="Core\Models\RefreshToken.cs" />
+    <Compile Include="Core\Dtos\AdvertisementParam.cs" />
+    <Compile Include="Core\Models\SettingTypeEnum.cs" />
+    <Compile Include="Core\Models\TouristVisit.cs" />
+    <Compile Include="Core\Models\TouristVisitImage.cs" />
+    <Compile Include="Core\Models\TouristVisitImageType.cs" />
+    <Compile Include="Core\Repositories\IAdvertisementImageRepository.cs" />
+    <Compile Include="Core\Repositories\IAdvertisementRepository.cs" />
+    <Compile Include="Core\Repositories\IAuthRepository.cs" />
+    <Compile Include="Core\Repositories\IBaseRepository.cs" />
+    <Compile Include="Core\Repositories\ICulturalCompetitionQuestionSponsorsRepository.cs" />
+    <Compile Include="Core\Repositories\ICulturalCompetitionAnswersRepository.cs" />
+    <Compile Include="Core\Repositories\ICulturalCompetitionQuestionRepository.cs" />
+    <Compile Include="Core\Repositories\IFeatureRepository.cs" />
+    <Compile Include="Core\Repositories\IAdvertisementFeatureRepository.cs" />
+    <Compile Include="Core\Repositories\IMobileSettingRepository.cs" />
+    <Compile Include="Core\Repositories\IUsersRepository.cs" />
+    <Compile Include="Core\Repositories\INewsRepository.cs" />
+    <Compile Include="Core\Repositories\IPackageRepository.cs" />
+    <Compile Include="Core\Repositories\ITouristVisitImageRepository.cs" />
+    <Compile Include="Core\Repositories\ITouristVisitRepository.cs" />
+    <Compile Include="Core\Tools\Helper.cs" />
+    <Compile Include="Helper\MemberInfo.cs" />
+    <Compile Include="Persistence\EntityConfigurations\AdvertisementImageConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\AdvertisementConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\ClientConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CulturalCompetitionAnswerConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CulturalCompetitionQuestionConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CulturalCompetitionQuestionSponsorsConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\FeatureConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\FeatureEntityConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\MobileSettingConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\PackageConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\AdvertisementFeatureConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\PackageFeatureConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\RefreshTokenConfigurations.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CategoryConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\NewsConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\NewsImageConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\TouristVisitConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\TouristVisitImagesConfigurations.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
+    <Compile Include="Core\Repositories\IEmailSettingRepository.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationSignInManager.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUser.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUserManager.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUserManagerImpl.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUserStore.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUserStoreImpl.cs" />
+    <Compile Include="Persistence\Infrastructure\Disposable.cs" />
+    <Compile Include="Persistence\Infrastructure\IUserCustomStore.cs" />
+    <Compile Include="Persistence\Infrastructure\UserValidatorLocalizedRo.cs" />
+    <Compile Include="Persistence\Migrations\201703131135421_CreateDataBaseTables.cs" />
+    <Compile Include="Persistence\Migrations\201703131135421_CreateDataBaseTables.Designer.cs">
+      <DependentUpon>201703131135421_CreateDataBaseTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703131137578_CreateDataBaseStoredProcedures.cs" />
+    <Compile Include="Persistence\Migrations\201703131137578_CreateDataBaseStoredProcedures.Designer.cs">
+      <DependentUpon>201703131137578_CreateDataBaseStoredProcedures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703131549542_CreateAdvertisementComponent.cs" />
+    <Compile Include="Persistence\Migrations\201703131549542_CreateAdvertisementComponent.Designer.cs">
+      <DependentUpon>201703131549542_CreateAdvertisementComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703141141044_CreateAdvertisementFeatureComponent.cs" />
+    <Compile Include="Persistence\Migrations\201703141141044_CreateAdvertisementFeatureComponent.Designer.cs">
+      <DependentUpon>201703141141044_CreateAdvertisementFeatureComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703141433384_CreateAdvertisementSP.cs" />
+    <Compile Include="Persistence\Migrations\201703141433384_CreateAdvertisementSP.Designer.cs">
+      <DependentUpon>201703141433384_CreateAdvertisementSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703141528569_CreateMobileSettingModule.cs" />
+    <Compile Include="Persistence\Migrations\201703141528569_CreateMobileSettingModule.Designer.cs">
+      <DependentUpon>201703141528569_CreateMobileSettingModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703141536325_CreateMobileSettingModuleSP.cs" />
+    <Compile Include="Persistence\Migrations\201703141536325_CreateMobileSettingModuleSP.Designer.cs">
+      <DependentUpon>201703141536325_CreateMobileSettingModuleSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703150833163_CreateCultureCompetition.cs" />
+    <Compile Include="Persistence\Migrations\201703150833163_CreateCultureCompetition.Designer.cs">
+      <DependentUpon>201703150833163_CreateCultureCompetition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703150920316_CreateCustomeCultureCompetition.cs" />
+    <Compile Include="Persistence\Migrations\201703150920316_CreateCustomeCultureCompetition.Designer.cs">
+      <DependentUpon>201703150920316_CreateCustomeCultureCompetition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703151200395_CreateTouristVisitsComponent.cs" />
+    <Compile Include="Persistence\Migrations\201703151200395_CreateTouristVisitsComponent.Designer.cs">
+      <DependentUpon>201703151200395_CreateTouristVisitsComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703151218482_CreateTouristVisitsSP.cs" />
+    <Compile Include="Persistence\Migrations\201703151218482_CreateTouristVisitsSP.Designer.cs">
+      <DependentUpon>201703151218482_CreateTouristVisitsSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703151409362_UpdateVisitsComponents.cs" />
+    <Compile Include="Persistence\Migrations\201703151409362_UpdateVisitsComponents.Designer.cs">
+      <DependentUpon>201703151409362_UpdateVisitsComponents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703151421332_UpdateTouristVisitsSP.cs" />
+    <Compile Include="Persistence\Migrations\201703151421332_UpdateTouristVisitsSP.Designer.cs">
+      <DependentUpon>201703151421332_UpdateTouristVisitsSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703160832224_UpdateAdvertisementModel.cs" />
+    <Compile Include="Persistence\Migrations\201703160832224_UpdateAdvertisementModel.Designer.cs">
+      <DependentUpon>201703160832224_UpdateAdvertisementModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703160841091_UpdateTouristVisitsImage.cs" />
+    <Compile Include="Persistence\Migrations\201703160841091_UpdateTouristVisitsImage.Designer.cs">
+      <DependentUpon>201703160841091_UpdateTouristVisitsImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703160845233_AlterTouristVisit_SelectById.cs" />
+    <Compile Include="Persistence\Migrations\201703160845233_AlterTouristVisit_SelectById.Designer.cs">
+      <DependentUpon>201703160845233_AlterTouristVisit_SelectById.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703161225286_UpdateSelectTouristVisitByIdSP.cs" />
+    <Compile Include="Persistence\Migrations\201703161225286_UpdateSelectTouristVisitByIdSP.Designer.cs">
+      <DependentUpon>201703161225286_UpdateSelectTouristVisitByIdSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703161227164_UpdateSelectTouristVisitByIdSPImageUrl.cs" />
+    <Compile Include="Persistence\Migrations\201703161227164_UpdateSelectTouristVisitByIdSPImageUrl.Designer.cs">
+      <DependentUpon>201703161227164_UpdateSelectTouristVisitByIdSPImageUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703161338483_UpdateNewsModel.cs" />
+    <Compile Include="Persistence\Migrations\201703161338483_UpdateNewsModel.Designer.cs">
+      <DependentUpon>201703161338483_UpdateNewsModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703161400262_updateADSmodel.cs" />
+    <Compile Include="Persistence\Migrations\201703161400262_updateADSmodel.Designer.cs">
+      <DependentUpon>201703161400262_updateADSmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703161521103_AlterAdvertisementSelectById.cs" />
+    <Compile Include="Persistence\Migrations\201703161521103_AlterAdvertisementSelectById.Designer.cs">
+      <DependentUpon>201703161521103_AlterAdvertisementSelectById.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703191156536_AddStartDateAndEndDateToAdvertisementAndAdvertisementFeatures.cs" />
+    <Compile Include="Persistence\Migrations\201703191156536_AddStartDateAndEndDateToAdvertisementAndAdvertisementFeatures.Designer.cs">
+      <DependentUpon>201703191156536_AddStartDateAndEndDateToAdvertisementAndAdvertisementFeatures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703201120533_Alter_Advertisement_SelectPaging.cs" />
+    <Compile Include="Persistence\Migrations\201703201120533_Alter_Advertisement_SelectPaging.Designer.cs">
+      <DependentUpon>201703201120533_Alter_Advertisement_SelectPaging.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703201558114_alterAdvertisement_SelectPaging.cs" />
+    <Compile Include="Persistence\Migrations\201703201558114_alterAdvertisement_SelectPaging.Designer.cs">
+      <DependentUpon>201703201558114_alterAdvertisement_SelectPaging.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201703260811410_CreateAdvertisement_SelectSummaryCountStoredProcedure.cs" />
+    <Compile Include="Persistence\Migrations\201703260811410_CreateAdvertisement_SelectSummaryCountStoredProcedure.Designer.cs">
+      <DependentUpon>201703260811410_CreateAdvertisement_SelectSummaryCountStoredProcedure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704050743345_UpdateStoredProecdures.cs" />
+    <Compile Include="Persistence\Migrations\201704050743345_UpdateStoredProecdures.Designer.cs">
+      <DependentUpon>201704050743345_UpdateStoredProecdures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704051015458_AlterAdvertisementTableWorkingHoursColumn.cs" />
+    <Compile Include="Persistence\Migrations\201704051015458_AlterAdvertisementTableWorkingHoursColumn.Designer.cs">
+      <DependentUpon>201704051015458_AlterAdvertisementTableWorkingHoursColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704070838564_alterTouristVisitsSelectPaged.cs" />
+    <Compile Include="Persistence\Migrations\201704070838564_alterTouristVisitsSelectPaged.Designer.cs">
+      <DependentUpon>201704070838564_alterTouristVisitsSelectPaged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704071357486_altersptouristvisitsselectById.cs" />
+    <Compile Include="Persistence\Migrations\201704071357486_altersptouristvisitsselectById.Designer.cs">
+      <DependentUpon>201704071357486_altersptouristvisitsselectById.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704251245137_News_UpdateImg.cs" />
+    <Compile Include="Persistence\Migrations\201704251245137_News_UpdateImg.Designer.cs">
+      <DependentUpon>201704251245137_News_UpdateImg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704261200204_UpdateImageURLLenght.cs" />
+    <Compile Include="Persistence\Migrations\201704261200204_UpdateImageURLLenght.Designer.cs">
+      <DependentUpon>201704261200204_UpdateImageURLLenght.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704290412027_Advertisement-Cascade-Delete.cs" />
+    <Compile Include="Persistence\Migrations\201704290412027_Advertisement-Cascade-Delete.Designer.cs">
+      <DependentUpon>201704290412027_Advertisement-Cascade-Delete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704300949204_Cascade-Delete-Advertisement-Image.cs" />
+    <Compile Include="Persistence\Migrations\201704300949204_Cascade-Delete-Advertisement-Image.Designer.cs">
+      <DependentUpon>201704300949204_Cascade-Delete-Advertisement-Image.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704300959131_Cascade-Delete-Advertisement-features.cs" />
+    <Compile Include="Persistence\Migrations\201704300959131_Cascade-Delete-Advertisement-features.Designer.cs">
+      <DependentUpon>201704300959131_Cascade-Delete-Advertisement-features.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201704301110067_LoadCategoryListWithParent.cs" />
+    <Compile Include="Persistence\Migrations\201704301110067_LoadCategoryListWithParent.Designer.cs">
+      <DependentUpon>201704301110067_LoadCategoryListWithParent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201705031511269_add-IsApproved-TouristVisit.cs" />
+    <Compile Include="Persistence\Migrations\201705031511269_add-IsApproved-TouristVisit.Designer.cs">
+      <DependentUpon>201705031511269_add-IsApproved-TouristVisit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201705100908232_CulturalCompetitionQuestion-Cascade-Delete-true.cs" />
+    <Compile Include="Persistence\Migrations\201705100908232_CulturalCompetitionQuestion-Cascade-Delete-true.Designer.cs">
+      <DependentUpon>201705100908232_CulturalCompetitionQuestion-Cascade-Delete-true.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201705141536500_CulturalCompetitionAnswersCreatedBy-CascadeDelete.cs" />
+    <Compile Include="Persistence\Migrations\201705141536500_CulturalCompetitionAnswersCreatedBy-CascadeDelete.Designer.cs">
+      <DependentUpon>201705141536500_CulturalCompetitionAnswersCreatedBy-CascadeDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201705211149483_AlterAllStored.cs" />
+    <Compile Include="Persistence\Migrations\201705211149483_AlterAllStored.Designer.cs">
+      <DependentUpon>201705211149483_AlterAllStored.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201705211226362_CreateSelectMainBannerAdvertisement_StoredProcedure.cs" />
+    <Compile Include="Persistence\Migrations\201705211226362_CreateSelectMainBannerAdvertisement_StoredProcedure.Designer.cs">
+      <DependentUpon>201705211226362_CreateSelectMainBannerAdvertisement_StoredProcedure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201705251338537_add-Name-MobileSetting.cs" />
+    <Compile Include="Persistence\Migrations\201705251338537_add-Name-MobileSetting.Designer.cs">
+      <DependentUpon>201705251338537_add-Name-MobileSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201705251505372_add-propertyLength-MobileSetting.cs" />
+    <Compile Include="Persistence\Migrations\201705251505372_add-propertyLength-MobileSetting.Designer.cs">
+      <DependentUpon>201705251505372_add-propertyLength-MobileSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Providers\ApplicationTokenProvider.cs" />
+    <Compile Include="Persistence\Repositories\AdvertisementFeatureRepository.cs" />
+    <Compile Include="Persistence\Repositories\AdvertisementImageRepository.cs" />
+    <Compile Include="Persistence\Repositories\AdvertisementRepository.cs" />
+    <Compile Include="Persistence\Repositories\AuthRepository.cs" />
+    <Compile Include="Persistence\Repositories\BaseRepository.cs" />
+    <Compile Include="Persistence\Repositories\CategoryRepository.cs" />
+    <Compile Include="Persistence\Repositories\CulturalCompetitionAnswers.cs" />
+    <Compile Include="Persistence\Repositories\CulturalCompetitionQuestionSponsorsRepository.cs" />
+    <Compile Include="Persistence\Repositories\CulturalCompetitionQuestionRepository.cs" />
+    <Compile Include="Persistence\Repositories\EmailSettingRepository.cs" />
+    <Compile Include="Helper\ExtensionMethods.cs" />
+    <Compile Include="Core\Repositories\ICategoryRepository.cs" />
+    <Compile Include="Persistence\Repositories\FeatureRepository.cs" />
+    <Compile Include="Persistence\Repositories\MobileSettingRepository.cs" />
+    <Compile Include="Persistence\Repositories\UsersRepository.cs" />
+    <Compile Include="Persistence\Repositories\NewsRepository.cs" />
+    <Compile Include="Persistence\Repositories\PackageRepository.cs" />
+    <Compile Include="Persistence\Repositories\TouristVisitImageRepository.cs" />
+    <Compile Include="Persistence\Repositories\TouristVisitRepository.cs" />
+    <Compile Include="Persistence\Services\EmailService.cs" />
+    <Compile Include="Persistence\Tools\EmailManager.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
+    <Compile Include="Persistence\Validators\ApplicationUserValidator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SysFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UtiltyManagemnt\UtiltyManagemnt.csproj">
+      <Project>{541347ad-3fcb-4afb-933c-a6b3702b6f97}</Project>
+      <Name>UtiltyManagemnt</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Persistence\Migrations\201703131135421_CreateDataBaseTables.resx">
+      <DependentUpon>201703131135421_CreateDataBaseTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703131137578_CreateDataBaseStoredProcedures.resx">
+      <DependentUpon>201703131137578_CreateDataBaseStoredProcedures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703131549542_CreateAdvertisementComponent.resx">
+      <DependentUpon>201703131549542_CreateAdvertisementComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703141141044_CreateAdvertisementFeatureComponent.resx">
+      <DependentUpon>201703141141044_CreateAdvertisementFeatureComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703141433384_CreateAdvertisementSP.resx">
+      <DependentUpon>201703141433384_CreateAdvertisementSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703141528569_CreateMobileSettingModule.resx">
+      <DependentUpon>201703141528569_CreateMobileSettingModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703141536325_CreateMobileSettingModuleSP.resx">
+      <DependentUpon>201703141536325_CreateMobileSettingModuleSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703150833163_CreateCultureCompetition.resx">
+      <DependentUpon>201703150833163_CreateCultureCompetition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703150920316_CreateCustomeCultureCompetition.resx">
+      <DependentUpon>201703150920316_CreateCustomeCultureCompetition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703151200395_CreateTouristVisitsComponent.resx">
+      <DependentUpon>201703151200395_CreateTouristVisitsComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703151218482_CreateTouristVisitsSP.resx">
+      <DependentUpon>201703151218482_CreateTouristVisitsSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703151409362_UpdateVisitsComponents.resx">
+      <DependentUpon>201703151409362_UpdateVisitsComponents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703151421332_UpdateTouristVisitsSP.resx">
+      <DependentUpon>201703151421332_UpdateTouristVisitsSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703160832224_UpdateAdvertisementModel.resx">
+      <DependentUpon>201703160832224_UpdateAdvertisementModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703160841091_UpdateTouristVisitsImage.resx">
+      <DependentUpon>201703160841091_UpdateTouristVisitsImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703160845233_AlterTouristVisit_SelectById.resx">
+      <DependentUpon>201703160845233_AlterTouristVisit_SelectById.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703161225286_UpdateSelectTouristVisitByIdSP.resx">
+      <DependentUpon>201703161225286_UpdateSelectTouristVisitByIdSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703161227164_UpdateSelectTouristVisitByIdSPImageUrl.resx">
+      <DependentUpon>201703161227164_UpdateSelectTouristVisitByIdSPImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703161338483_UpdateNewsModel.resx">
+      <DependentUpon>201703161338483_UpdateNewsModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703161400262_updateADSmodel.resx">
+      <DependentUpon>201703161400262_updateADSmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703161521103_AlterAdvertisementSelectById.resx">
+      <DependentUpon>201703161521103_AlterAdvertisementSelectById.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703191156536_AddStartDateAndEndDateToAdvertisementAndAdvertisementFeatures.resx">
+      <DependentUpon>201703191156536_AddStartDateAndEndDateToAdvertisementAndAdvertisementFeatures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703201120533_Alter_Advertisement_SelectPaging.resx">
+      <DependentUpon>201703201120533_Alter_Advertisement_SelectPaging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703201558114_alterAdvertisement_SelectPaging.resx">
+      <DependentUpon>201703201558114_alterAdvertisement_SelectPaging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201703260811410_CreateAdvertisement_SelectSummaryCountStoredProcedure.resx">
+      <DependentUpon>201703260811410_CreateAdvertisement_SelectSummaryCountStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704050743345_UpdateStoredProecdures.resx">
+      <DependentUpon>201704050743345_UpdateStoredProecdures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704051015458_AlterAdvertisementTableWorkingHoursColumn.resx">
+      <DependentUpon>201704051015458_AlterAdvertisementTableWorkingHoursColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704070838564_alterTouristVisitsSelectPaged.resx">
+      <DependentUpon>201704070838564_alterTouristVisitsSelectPaged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704071357486_altersptouristvisitsselectById.resx">
+      <DependentUpon>201704071357486_altersptouristvisitsselectById.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704251245137_News_UpdateImg.resx">
+      <DependentUpon>201704251245137_News_UpdateImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704261200204_UpdateImageURLLenght.resx">
+      <DependentUpon>201704261200204_UpdateImageURLLenght.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704290412027_Advertisement-Cascade-Delete.resx">
+      <DependentUpon>201704290412027_Advertisement-Cascade-Delete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704300949204_Cascade-Delete-Advertisement-Image.resx">
+      <DependentUpon>201704300949204_Cascade-Delete-Advertisement-Image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704300959131_Cascade-Delete-Advertisement-features.resx">
+      <DependentUpon>201704300959131_Cascade-Delete-Advertisement-features.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704301110067_LoadCategoryListWithParent.resx">
+      <DependentUpon>201704301110067_LoadCategoryListWithParent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705031511269_add-IsApproved-TouristVisit.resx">
+      <DependentUpon>201705031511269_add-IsApproved-TouristVisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705100908232_CulturalCompetitionQuestion-Cascade-Delete-true.resx">
+      <DependentUpon>201705100908232_CulturalCompetitionQuestion-Cascade-Delete-true.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705141536500_CulturalCompetitionAnswersCreatedBy-CascadeDelete.resx">
+      <DependentUpon>201705141536500_CulturalCompetitionAnswersCreatedBy-CascadeDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705211149483_AlterAllStored.resx">
+      <DependentUpon>201705211149483_AlterAllStored.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705211226362_CreateSelectMainBannerAdvertisement_StoredProcedure.resx">
+      <DependentUpon>201705211226362_CreateSelectMainBannerAdvertisement_StoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705251338537_add-Name-MobileSetting.resx">
+      <DependentUpon>201705251338537_add-Name-MobileSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705251505372_add-propertyLength-MobileSetting.resx">
+      <DependentUpon>201705251505372_add-propertyLength-MobileSetting.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Saned.Jazan.Data.dll" />
+    <Content Include="bin\Debug\Saned.Jazan.Data.pdb" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

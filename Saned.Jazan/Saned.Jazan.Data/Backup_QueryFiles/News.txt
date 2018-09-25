@@ -1,0 +1,240 @@
+    Sql(@"CREATE FUNCTION dbo.Split (@sep char(1), @s varchar(8000))
+                    RETURNS table
+                    AS
+                    RETURN (
+                        WITH splitter_cte AS (
+                          SELECT CHARINDEX(@sep, @s) as pos, 0 as lastPos
+                          UNION ALL
+                          SELECT CHARINDEX(@sep, @s, pos + 1), pos
+                          FROM splitter_cte
+                          WHERE pos > 0
+                        )
+                        SELECT SUBSTRING(@s, lastPos + 1,
+                                         case when pos = 0 then 80000
+                                         else pos - lastPos -1 end) as chunk
+                        FROM splitter_cte
+                      )
+                    GO
+                    Create FUNCTION dbo.Wordparser
+                    (
+                      @multiwordstring VARCHAR(255),
+                      @wordnumber      NUMERIC
+                    )
+                    returns VARCHAR(255)
+                    AS
+                      BEGIN
+                          DECLARE @remainingstring VARCHAR(255)
+                          SET @remainingstring=@multiwordstring
+                          DECLARE @numberofwords NUMERIC
+                          SET @numberofwords=(LEN(@remainingstring) - LEN(REPLACE(@remainingstring, '-', '')) + 1)
+                          DECLARE @word VARCHAR(50)
+                          DECLARE @parsedwords TABLE
+                          (
+                             line NUMERIC IDENTITY(1, 1),
+                             word VARCHAR(255)
+                          )
+                          WHILE @numberofwords > 1
+                            BEGIN
+                                SET @word=LEFT(@remainingstring, CHARINDEX('-', @remainingstring) - 1)
+                                INSERT INTO @parsedwords(word)
+                                SELECT @word
+                                SET @remainingstring= REPLACE(@remainingstring, Concat(@word, '-'), '')
+                                SET @numberofwords=(LEN(@remainingstring) - LEN(REPLACE(@remainingstring, '-', '')) + 1)
+                                IF @numberofwords = 1
+                                  BREAK
+                                ELSE
+                                  CONTINUE
+                            END
+                          IF @numberofwords = 1
+                            SELECT @word = @remainingstring
+                          INSERT INTO @parsedwords(word)
+                          SELECT @word
+                          RETURN
+                            (SELECT word
+                             FROM   @parsedwords
+                             WHERE  line = @wordnumber)
+                      END
+                    ");
+
+            // Insert News 
+            Sql(@"create procedure News_Insert
+                    @Title nvarchar(300),
+                    @Description nvarchar(max),
+                    @concatenatedImages nvarchar(max)
+                    As
+                    Begin 
+                    Begin Transaction
+                    Declare @NewsId int
+                    Declare @currentLine nvarchar(max)
+                    Declare @batchCount int
+                    Declare @batches Table(batch nvarchar(max), isConcatinated bit default 0)
+                                INSERT[dbo].[News]([Title], [Details], [PublishingDate])
+                        VALUES(@Title, @Description, GetDate())
+                    Set @NewsId = SCOPE_IDENTITY()
+                    Insert into @batches(batch)
+                       Select* from dbo.Split(',' , @concatenatedImages)
+                    set @batchCount = (select Count(*) from @batches)
+                    While @batchCount > 0
+                    begin
+                      Select top 1  @currentLine = batch from @batches where isConcatinated = 0
+                       Insert into dbo.NewsImages (ImagePath,IsDefault,NewsId)
+                         select dbo.Wordparser(@currentLine , 1) ,  CASE WHEN dbo.Wordparser(@currentLine ,2) = '0' THEN 0 ELSE 1 END ,@NewsId
+                      update @batches set isConcatinated = 1 where batch = @currentLine
+                      set @batchCount = @batchCount - 1
+                    end
+                    --SELECT CASE WHEN @PREPRO = 'False' THEN 0 ELSE 1 END
+                    commit
+                    end ");
+
+            Sql(@"
+                CREATE procedure[dbo].[News_Select_Image]
+                    @NewsId int
+                    As
+                    begin
+                    select im.ImageId, im.ImagePath, im.IsDefault from dbo.NewsImages im where NewsId = @NewsId;
+                    end
+                ");
+            //Sql(@"create procedure dbo.News_Insert_Image
+            //        @Url nvarchar(36),
+            //        @isDefault bit ,
+            //        @NewsId int 
+            //        As 
+            //        begin 
+            //        Insert into dbo.NewsImages (ImagePath,IsDefault,NewsId) Values(@Url,@isDefault,@NewsId)
+            //        end");
+
+            Sql(@" create procedure dbo.News_Select_Paged
+                       @PageNumber int = 1 ,
+                       @PageSize int =10,
+                       @DateFilter nvarchar(8) = Null,
+                       @TitleFilter  nvarchar(300) =null,
+                       @DetailFilter nvarchar(max) = null
+                     As
+                     begin
+                     Declare @result Table (NewsId int ,Title nvarchar(300), Details nvarchar(max) , DefaultImage nvarchar(36) , PublishingDate datetime)
+                     Declare @tempresult Table (NewsId int ,Title nvarchar(300), Details nvarchar(max) , DefaultImage nvarchar(36) , PublishingDate datetime)
+                    insert into @result 
+                     SELECT  cm.Id ,  cm.Title ,cm.Details , nm.ImagePath , cm.PublishingDate
+                     FROM  dbo.News cm inner join dbo.NewsImages nm on cm.Id = nm.NewsId
+                     where nm.IsDefault = 1 
+			                    order by cm.PublishingDate desc
+                                             OFFSET @PageSize *(@PageNumber - 1) ROWS FETCH NEXT @PageSize ROWS ONLY OPTION(RECOMPILE)
+                    IF not NULLIF(@DateFilter, '') IS NULL
+                    begin 
+	                    insert into @tempresult
+                          Select * from @result where PublishingDate between @DateFilter and @DateFilter + ' 23:59:59'
+	                    delete from @result where 1 = 1
+	                    insert into @result 
+	                       select * from @tempresult
+	                    delete from @tempresult where 1 = 1
+                    end
+
+                    IF not NULLIF(@TitleFilter, '') IS NULL
+                    begin 
+                    insert into @tempresult
+                       Select * from @result where Title Like '%'+ @TitleFilter+ '%'
+                       delete from @result where 1 = 1
+	                    insert into @result 
+	                       select * from @tempresult
+	                    delete from @tempresult where 1 = 1
+                    end
+
+                    IF not NULLIF(@TitleFilter, '') IS NULL
+                    begin 
+                    insert into @tempresult
+                       Select * from @result where Details Like '%'+ @DetailFilter+ '%'
+                       delete from @result where 1 = 1
+	                    insert into @result 
+	                       select * from @tempresult
+	                    delete from @tempresult where 1 = 1
+                    end
+                    select * from @result ;
+                    end
+                 ");
+
+            Sql(@"create procedure dbo.News_Select_Single 
+                            (
+                                @NewsId int 
+                            )
+                            As
+                            begin 
+                            select top 1 * from dbo.News where Id = @NewsId
+                            end ");
+
+            Sql(@"
+                Create procedure [dbo].[News_Update] 
+                        (
+                          @NewsId int ,
+                          @Title nvarchar(300),
+                          @Description nvarchar(max),
+                          @concatenatedNewImages nvarchar(max) = Null ,
+                          @deletedImages nvarchar(max) = Null
+                        ) 
+                        As 
+                        begin 
+                        Set NoCount ON ;
+                        begin transaction 
+                        Update [dbo].[News] set [Title] =@Title, [Details] = @Description where Id = @NewsId
+                        IF not NULLIF(@deletedImages, '') IS NULL
+                        begin 
+                        -- Deleting Images 
+                        Declare @currentDeleted nvarchar(max)
+                        Declare @DeletedbatchCount int 
+                        Declare @batchesDeleted Table (batch nvarchar(max) , isProcessed bit default 0)
+                        Insert into @batchesDeleted (batch) 
+                           Select * from dbo.Split(',' , @deletedImages)
+                        set @DeletedbatchCount = (select count (*) from @batchesDeleted)
+
+                        While @DeletedbatchCount > 0 
+                        begin 
+                          Select top 1  @currentDeleted = batch from @batchesDeleted where isProcessed = 0
+                          delete from dbo.NewsImages where ImageId = CONVERT(int, @currentDeleted) 
+                          update @batchesDeleted set isProcessed = 1 where batch = @currentDeleted
+                          set @DeletedbatchCount = @DeletedbatchCount -1
+                        end
+                        end
+
+                        IF not NULLIF(@concatenatedNewImages, '') IS NULL
+                        begin 
+                        -- adding new images 
+                        Declare @currentLine nvarchar(max)
+                        Declare @batchCount int 
+                        Declare @batches Table (batch nvarchar(max) , isConcatinated bit default 0);
+                        Insert into @batches (batch) 
+                           Select * from dbo.Split(',' , @concatenatedNewImages)
+                        set @batchCount = (select Count(*) from @batches)
+
+                        While @batchCount > 0
+                        begin
+                          Select top 1  @currentLine = batch from @batches where isConcatinated = 0
+                           Insert into dbo.NewsImages (ImagePath,IsDefault,NewsId)
+                             select dbo.Wordparser(@currentLine , 1) ,  CASE WHEN dbo.Wordparser(@currentLine ,2) = '0' THEN 0 ELSE 1 END ,@NewsId
+                          update @batches set isConcatinated = 1 where batch = @currentLine
+                          set @batchCount = @batchCount - 1
+                        end
+                        end
+                        commit
+                        end 
+            ");
+
+            Sql(@"create procedure dbo.News_Delete
+                    (@NewsId int)
+                    As 
+                    begin 
+                    begin tran
+                    delete from dbo.News where Id = @NewsId ;
+                    Delete from dbo.NewsImages where NewsId = @NewsId
+                    commit
+                end");
+
+            Sql(@"create procedure dbo.News_Image_SetAsDefault
+                    (@ImageID int)
+                    As
+                    begin 
+                      begin tran
+                      declare @oldId int 
+                      Set @oldId = (Select top 1 ImageId from dbo.NewsImages where IsDefault = 1)
+                      update dbo.NewsImages set IsDefault = 0 where ImageId = @oldId
+                      update dbo.NewsImages set IsDefault = 1 where ImageId = @ImageID
+                      commit 
+                    end");

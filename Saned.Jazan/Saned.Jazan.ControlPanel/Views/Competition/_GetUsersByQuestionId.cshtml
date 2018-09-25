@@ -1,0 +1,210 @@
+﻿
+@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+@model PagedList.IPagedList<Saned.Jazan.Data.Core.Models.CulturalCompetitionAnswer>
+
+
+
+@functions {
+	private int _i;
+}
+
+@if (Model.Count > 0)
+{
+	<label class="col-xs-12">عدد المشتركين : @ViewBag.ResultCount </label>
+	<div class="box-body table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+			<tr>
+				<th>م</th>
+				<th>صورة المشترك</th>
+				<th>اسم المشترك</th>
+				<th>اسم المستخدم</th>
+				<th>اجابة المشترك</th>
+
+			</tr>
+			</thead>
+			<tbody>
+			@{ int counter = 0; }
+			@foreach (var competition in Model)
+			{
+				counter++;
+				<tr>
+					<td>@counter</td>
+					<td>
+
+
+						@if (!string.IsNullOrEmpty(competition.CreatedByUser.PhotoUrl))
+						{
+							<a href="@(ViewBag.FrontEndUrl + "" + competition.CreatedByUser.PhotoUrl)" rel="prettyPhoto[pp_gal]" class="img-circle" width="100" height="100">
+								<img src="@(ViewBag.FrontEndUrl + "" + competition.CreatedByUser.PhotoUrl)" onerror="this.onerror = null;this.src = '/Content/dist/img/noimagedefault.jpg'" class="img-circle" width="100" height="100"/>
+
+							</a>
+						}
+						else
+						{
+							<a href="/Content/dist/img/noimagedefault.jpg">
+								<img src="/Content/dist/img/noimagedefault.jpg" class="img-circle" width="100" height="100"/>
+							</a>
+						}
+					</td>
+					<td >@competition.CreatedByUser.Name</td>
+					<td >@competition.CreatedByUser.UserName</td>
+					<td style="word-wrap: break-word; width: 30em">@competition.Value</td>
+
+
+
+					<td>
+
+
+						@Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+							"DeleteAnswer", "Competition",
+							new {Id = competition.Id, QuestionId = competition.CulturalCompetitionQuestionId, Page = ViewBag.Page, keyword = ViewBag.keyword},
+							new AjaxOptions
+							{
+								Confirm = "هل انت متأكد انك تريد حذف الاجابة ؟",
+								UpdateTargetId = "Ads-Comments",
+								InsertionMode = InsertionMode.Replace,
+								HttpMethod = "POST",
+								LoadingElementId = "ajaxLoaderDiv",
+								OnSuccess = "onsuccessDeletion()",
+								OnFailure = "onFailureDeletion()"
+							},
+							new {@class = "btn btn-danger"})
+
+
+						@{
+							if (competition.IsWinner)
+							{
+								@Ajax.RawActionLink(string.Format("<i title='الغاء الفوز' class='glyphicon glyphicon-remove'></i>"),
+									"CancelWining", "Competition",
+									new {Id = competition.Id},
+									new AjaxOptions
+									{
+										HttpMethod = "POST",
+										OnSuccess = "onsuccessUnApprove($(this),data)",
+										OnFailure = "onFailureUnApprove()"
+									},
+									new {@class = "btn btn-danger"})
+								;
+							}
+							else
+							{
+								@Ajax.RawActionLink(string.Format("<i title='تحقيق الفوز' class='glyphicon glyphicon-ok'></i>"),
+									"SetAsWinner", "Competition",
+									new {Id = competition.Id},
+									new AjaxOptions
+									{
+										HttpMethod = "POST",
+										OnSuccess = "onsuccessApprove($(this),data)",
+										OnFailure = "onFailureApprove()"
+									},
+									new {@class = "btn btn-success"})
+								;
+							}
+						}
+
+					</td>
+
+
+				</tr>
+			}
+			</tbody>
+		</table>
+
+
+
+
+		@Html.PagedListPager(Model,
+			page => Url.Action("_GetUsersByQuestionId", new {page = page, Id = Model[0].CulturalCompetitionQuestionId}),
+			PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() {UpdateTargetId = "Ads-Comments", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv"}))
+
+	</div>
+
+
+
+
+
+
+	<script>
+		function onsuccessDeletion(data) {
+
+			NotificationService.displaySuccess("تم الحذف بنجاح");
+		}
+
+		function onFailureDeletion(data) {
+
+			NotificationService.displayError("حدث خطأ أثناء الحذف .");
+		}
+
+		function onsuccessApprove(btn, data) {
+			if (data.message === "Approved") {
+				btn.html("<i title='الغاء الفوز' class='glyphicon glyphicon-remove'></i>");
+				var fail = btn.attr('data-ajax-failure').replace('SetAsWinner', 'CancelWining');
+				var success = btn.attr('data-ajax-success').replace('SetAsWinner', 'CancelWining');
+				btn.attr('data-ajax-failure', fail);
+				btn.attr('data-ajax-success', success);
+
+				var path = btn.attr('href').replace('SetAsWinner', 'CancelWining');
+				btn.attr('href', path);
+
+
+				btn.removeClass('btn-success');
+				btn.addClass('btn-danger');
+				NotificationService.displaySuccess("تم الفوز بنجاح");
+			} else if (data.message === "NotFound") {
+				NotificationService.displayError("هذا الأعلان غير موجود .");
+			} else
+				NotificationService.displayError("حدث خطأ أثناء الفوز .");
+
+
+		}
+
+		function onFailureApprove() {
+			NotificationService.displayError("حدث خطأ أثناء الفوز .");
+
+		}
+
+		function onsuccessUnApprove(btn, data) {
+			if (data.message === "UnApproved") {
+				btn.html("<i title='الفوز' class='glyphicon glyphicon-ok'></i>");
+				var path = btn.attr('href').replace('CancelWining', 'SetAsWinner');
+				btn.attr('href', path);
+				var fail = btn.attr('data-ajax-failure').replace('CancelWining', 'SetAsWinner');
+				var success = btn.attr('data-ajax-success').replace('CancelWining', 'SetAsWinner');
+				btn.attr('data-ajax-failure', fail);
+				btn.attr('data-ajax-success', success);
+
+				btn.removeClass('btn-danger');
+				btn.addClass('btn-success');
+				NotificationService.displaySuccess("تم الغاء الفوز بنجاح");
+			} else if (data.message === "NotFound")
+				NotificationService.displayError("هذا الأعلان غير موجود .");
+			else
+				NotificationService.displayError("حدث خطأ أثناء الغاء الفوز .");
+		}
+
+		function onFailureUnApprove(btn) {
+			NotificationService.displayError("حدث خطأ أثناء الغاء الفوز .");
+
+		}
+	</script>
+							}
+							else
+							{
+								<div class="box box-solid">
+									<div class="alert ">
+										<strong> لا يوجد مشتركين .</strong>
+									</div>
+
+
+								</div>
+							}
+
+
+
+
+
+
+
+

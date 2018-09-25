@@ -1,0 +1,162 @@
+﻿@model PagedList.IPagedList<Saned.Jazan.Data.Core.Models.News>
+@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+
+@if (Model.Count > 0)
+{
+
+    <div class="row box-body">
+
+        <label class="col-xs-10">عدد الاخبار : @ViewBag.ResultCount </label>
+
+        @*<div class="col-xs-2">
+     @Html.DropDownList("PageSize", new SelectList(new Dictionary<string, int> { { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { onchange = "ChangePageSize(this)", @class = "form-control" })
+
+
+
+    </div>*@
+
+    </div>
+    <div class="box-body table-responsive">
+
+        <table id="dtCategoties" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>م</th>
+
+                <th>صورة الخبر</th>
+                <th>عنوان الخبر</th>
+                <th>تاريخ الخبر</th>
+
+                <th>الإعدادات</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{ int counter = 0; }
+            @foreach (var bo in Model)
+            {
+                counter++;
+                <tr>
+                    <td>@counter</td>
+
+                    <td>
+
+
+                        @{
+                            var photo = new Saned.Jazan.Data.Core.Models.NewsImage();
+                            photo = bo.NewsImages.FirstOrDefault();
+                        }
+                        @if (@photo != null)
+                        {
+
+                            if (!string.IsNullOrEmpty(photo.ImagePath))
+                            {
+                                <a href="@photo.ImagePath" rel="prettyPhoto[pp_gal]">
+                                    <img src="@photo.ImagePath.Replace("uploads", "uploads/Thumbnails")" onerror="this.onerror = null;this.src = '/Content/dist/img/noimagedefault.jpg'" class="img-circle" width="50" height="50"/>
+
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@photo.ImagePath">
+                                    <img src="/Content/dist/img/noimagedefault.jpg" class="img-circle" width="50" height="50"/>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="#">
+                                <img src="/Content/dist/img/noimagedefault.jpg"class="img-circle" width="50" height="50"/>
+                            </a>
+                        }
+
+                    </td>
+
+                    <td>
+                        <p style="word-wrap: break-word">
+                            @bo.Title
+
+
+
+
+                        </p>
+                    </td>
+                    <td>@bo.PublishingDate</td>
+                    <td>
+                        @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                            "DeleteNews", "News",
+                            new {Id = bo.Id, Page = ViewBag.Page, keyword = ViewBag.keyword, PublishingDate = ViewBag.PublishingDate },
+                            new AjaxOptions
+                            {
+                                Confirm = "هل انت متأكد انك تريد حذف الخبر ؟",
+                                UpdateTargetId = "searchResult",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "POST",
+                                LoadingElementId = "ajaxLoaderDiv",
+                                OnSuccess = "getresult",
+                                OnFailure = "geterrorresult"
+                            },
+                            new {@class = "btn btn-danger"})
+                        <a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("Edit", "News", new {id = bo.Id}))" class="btn btn-success"><i title="تعديل" class="fa fa-edit"></i></a>
+
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+
+
+        @Html.PagedListPager(Model,
+            page => Url.Action("Search", new {page = page, SearchTerm = ViewBag.SearchTerm}),
+            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() {UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv"}))
+
+    </div>
+    <script>
+        var getresult = function(data) {
+            if (data.message === "Not Deleted") {
+
+                NotificationService.displayError("هذا التصنيف لا يمكن حذفه لانه مرتبط بعناصر اخري داخل النظام");
+                //window.location.reload();
+            } else {
+                NotificationService.displaySuccess("تم الحذف بنجاح");
+            }
+        };
+
+
+        function onFailureDeletion(data) {
+
+            NotificationService.displayError("حدث خطأ أثناء الحذف .");
+        }
+
+        var geterrorresult = function(data) {
+            console.log(data);
+            console.log(data.statusText);
+            if (data.statusText === "Not Deleted") {
+
+                NotificationService.displayError("هذا التصنيف لا يمكن حذفه لانه مرتبط بعناصر اخري داخل النظام");
+                //window.location.reload();
+            } else {
+                NotificationService.displayError("حدث خطأ أثناء الحذف .");
+            }
+        };
+    </script>
+
+}                             
+
+                                else
+                                {
+<div class="box box-solid">
+    <div class="alert">
+        <strong> لا يوجد اخبار  .</strong>
+    </div>
+
+
+</div>
+                                }
+
+
+    
+
+
+

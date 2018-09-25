@@ -1,0 +1,98 @@
+﻿@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+@model PagedList.IPagedList<Saned.Jazan.Data.Core.Models.Package>
+<div class="row box-body">
+    
+    <label class="col-xs-12">عدد الباقات :  @ViewBag.ResultCount </label>
+
+</div>
+<div class="box-body table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>م</th>           
+            <th>اسم الباقة</th>
+            @*<th>اسم الباقة بالانجليزية</th>*@
+            <th>تاريخ الأضافة</th>
+            <th>المدة</th>
+            <th>السعر</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{int counter = 0;}
+        @foreach (var package in Model)
+        {
+            counter++;
+            <tr>
+                <td>@counter</td>
+                
+                <td>@package.ArabicName</td>
+                @*<td>@package.EnglishName</td>*@
+                <td>@package.CreatedOn</td>
+                <td>@package.Period</td>
+                <td>@package.Price</td>
+                <td>
+                    <a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("Edit", "Package", new {id = package.Id}))" class="btn btn-primary"><i title="تعديل" class="fa fa-edit"></i></a>
+
+                    @*@Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                   "Delete", "Package",
+                   new { Id = package.Id, Page = ViewBag.Page, keyword = ViewBag.keyword},
+                   new AjaxOptions
+                   {
+                       Confirm = "هل تريد حذف هذا العنصر",
+                       UpdateTargetId = "searchResult",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "POST",
+                       LoadingElementId = "ajaxLoaderDiv",
+                       OnSuccess = "onsuccessDeletion()",
+                       OnFailure = "onFailureDeletion()"
+                   },
+                   new { @class = "btn btn-danger" })*@
+
+                    
+                    
+                    
+                    
+                    
+
+
+
+
+                    <a title="تفاصيل" href="@(Url.Action("Details", "Package", new {id = package.Id}))" class="btn btn-primary"><i title="تفاصيل" class="glyphicon glyphicon-list-alt"></i></a>
+
+                </td>
+
+
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    
+
+
+    @Html.PagedListPager(Model,
+        page => Url.Action("Search", new { page =page, keyword = ViewBag.keyword, CategoryId = ViewBag.CategoryId, PackageId = ViewBag.PackageId, IsApproved=ViewBag.IsApproved }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv" }))
+
+</div>
+
+
+
+<script>
+    function onsuccessDeletion(data) {
+
+        NotificationService.displaySuccess("تم الحذف بنجاح");
+    }
+    function onFailureDeletion(data) {
+
+        NotificationService.displayError("حدث خطأ أثناء الحذف .");
+    }
+   
+    
+   
+</script>
+
+
+
+

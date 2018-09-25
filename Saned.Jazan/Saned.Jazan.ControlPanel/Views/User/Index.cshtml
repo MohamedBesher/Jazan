@@ -1,0 +1,103 @@
+﻿@using System.Web.UI.WebControls
+@model Saned.Jazan.ControlPanel.ViewModels.UserSearchModel
+@{
+
+    ViewBag.Title = "المستخدمين";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "divLoading"
+    };
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+
+            <small>قائمة المستخدمين</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a onclick="showPageLoadingSpinner()" 
+                   href="@Url.Action("Index", "Home")">
+                <i class="fa fa-dashboard"></i>الرئيسية
+            </a></li>
+            <li class="active">المستخدمين</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="row">
+                        <div class="box-header">
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title">
+                                    عرض بيانات المميزات
+                                </h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title pull-right">
+
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    @using (Ajax.BeginForm("Search", options))
+                    {
+                        <div class="form-group">
+                            
+                            <div class="col-xs-12">
+                                @Html.EditorFor(model => model.Keyword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "ادخل كلمة البحث" } })
+                            </div>
+                            
+                        </div>
+                        <div class="form-group">                           
+                            <div class="col-xs-12">
+                                <button type="submit" class="btn btn-success pull-right"><i class="glyphicon glyphicon-search"></i>بحث</button>
+
+                            </div>
+                        </div>                         
+                    }
+                    <div id="divLoading" style="color:red;width:200px;background-color:yellow;font-size:larger;display:none;position:fixed;">Loading ....</div>
+
+                    <div id="searchResult">
+
+                        @Html.Action("Search", new { keyword = "", page = 1 })
+                    </div>
+
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

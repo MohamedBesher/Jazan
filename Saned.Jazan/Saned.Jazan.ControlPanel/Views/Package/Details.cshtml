@@ -1,0 +1,196 @@
+﻿@model Saned.Jazan.Data.Core.Models.Package
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+  
+    <section class="content-header">
+        <h1>
+            <small> تفاصيل الباقة</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-dashboard"></i>الرئيسية
+                </a>
+            </li>
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Package")">
+                    <i class="fa fa-gift"></i>الباقات
+                </a>
+            </li>
+
+            <li class="active">تفاصيل الباقة</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="row">
+                        <div class="box-header">
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title">
+                                    عرض تفاصيل الباقة
+                                </h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title pull-right">
+
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div>
+                        <div id="Ads-Details">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+
+                                    <div class="col-xs-4">
+                                        <div class="box-body">
+
+                                            <dl class="dl-horizontal">
+                                                <dt>
+                                                   الاسم
+                                                </dt>
+
+                                                <dd>
+                                                    @Html.DisplayFor(model => model.ArabicName)
+                                                </dd>
+
+                                                @*<dt>
+                                                    @Html.DisplayNameFor(model => model.EnglishName)
+                                                </dt>
+
+                                                <dd>
+                                                    @Html.DisplayFor(model => model.EnglishName)
+                                                </dd>*@
+                                                <dt>
+                                                    @Html.DisplayNameFor(model => model.Period)
+                                                </dt>
+
+                                                <dd>
+                                                    @Html.DisplayFor(model => model.Period) شهر
+                                                </dd>
+                                                
+                                                                                            
+
+                                                <dt>
+                                                    @Html.DisplayNameFor(model => model.CreatedOn)
+                                                </dt>
+
+                                                <dd>
+                                                    @Html.DisplayFor(model => model.CreatedOn)
+                                                </dd>
+
+                                           
+
+                                            </dl>
+
+                                        </div>
+                                    </div>
+                                <div class="col-xs-8">
+                                    <h4>مميزات الباقة </h4>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>اسم الميزة </th>
+                                                @*<th>اسم الميزة بالأنجليزية</th>*@
+                                                <th>المدة بالايام</th>
+                                                <th>العدد</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           @foreach (var packageFeature in Model.PackageFeatures)
+                                           {
+                                            <tr>
+                                                <td> @packageFeature.Feature.ArabicName</td>
+                                                @*<td>
+                                                    @(packageFeature.Feature.EnglishName ?? "غير محدد")
+                                                </td>*@
+                                                <td> @(packageFeature.Period.ToString()!="" ? packageFeature.Period.ToString() : "غير محدد")</td>
+                                               
+                                                <td> @(packageFeature.Quantity.ToString() != "" ? packageFeature.Quantity.ToString() : "غير محدد")</td>
+
+
+
+                                            </tr>
+                                           }
+                                        </tbody>
+                                    </table>
+                                    
+
+
+                                </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div><!-- /.box-header -->
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

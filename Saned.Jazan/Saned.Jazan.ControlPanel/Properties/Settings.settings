@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Saned.Jazan.ControlPanel.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FrontEndUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://JazanApi.saned-projects.com/uploads/</Value>
+    </Setting>
+    <Setting Name="NotificationFeatureId" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="appKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">70bc392b-584e-47a4-95e2-82074e7616f9</Value>
+    </Setting>
+    <Setting Name="resetKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">YWM2YzVkOTUtNTljOC00NWM2LWE5NWYtOGYxNjMzNzlhYTMz</Value>
+    </Setting>
+    <Setting Name="userAuth" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">N2Y2MzY2YjAtOGI4MS00Y2NjLWJiOTUtZDFhMzFmNzI3YzA2</Value>
+    </Setting>
+    <Setting Name="PageSize" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="ApiUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://JazanApi.saned-projects.com/api/</Value>
+    </Setting>
+    <Setting Name="BackEndUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://JazanAdmin.saned-projects.com/uploads/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

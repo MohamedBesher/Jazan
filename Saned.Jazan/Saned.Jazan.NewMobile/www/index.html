@@ -1,0 +1,2209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+    <title>جازان</title>
+
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="css/framework7.material.rtl.min.css">
+    <link href="css/owl.carousel.css" rel="stylesheet" />
+    <link href="css/owl.theme.default.min.css" rel="stylesheet" />
+
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/jquery.rateyo.css" />
+    <link rel="stylesheet" href="css/my-app.css">
+    <link href="css/parsley.css" rel="stylesheet" />
+
+</head>
+<body>
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Right panel with cover effect-->
+    <div class="panel panel-right panel-cover">
+        <div class="content-block">
+            <div class="panel-prof">
+                <img src="img/logo.png" />
+            </div>
+
+
+            <a href="#intro" id="linkTointro" class="close-panel"><i class="ionicons ion-home"></i>الرئيسية</a>
+            <a href="#advertismentsProfile" style="display:none;" id="linkToadvertismentsProfile" class="close-panel"><i class="ionicons ion-android-person"></i>الصفحة الشخصية</a>
+            <a href="#addAdvertisment" style="display:none;" id="linkToaddAdvertisment" class="close-panel"><i class="ionicons ion-cube"></i>إضافة مشروع</a>
+            <a href="#notification" style="display:none;" id="linkTonotification" class="close-panel"><i class="ionicons ion-android-notifications"></i>الإشعارات</a>
+            <a href="#changePassword" style="display:none;" id="linkToresetPass" class="close-panel"><i class="ionicons ion-ios-navigate"></i>تغيير كلمة المرور</a>
+            <a href="#login" id="linkTologin" class="close-panel"><i class="ionicons ion-power"></i>تسجيل الدخول</a>
+            <a href="#" id="linkTologout" style="display:none;" class="close-panel"><i class="ionicons ion-power"></i>تسجيل الخروج</a>
+            <hr />
+            <a href="#dalel" id="linkTodalel" class="close-panel"><i class="ionicons ion-android-map"></i>دليل جازان</a>
+            <a href="#news" id="linkTonews" class="close-panel"><i class="ionicons ion-earth"></i>الأخبار</a>
+            <a href="#quiz" id="linkToquiz" class="close-panel"><i class="ionicons ion-ribbon-b"></i>المسابقة الثقافية</a>
+            <a href="#advertisments" id="linkToadvertisments" class="close-panel"><i class="ionicons ion-speakerphone"></i>الإعلانات</a>
+            <a href="#tourist" id="linkTotourist" class="close-panel"><i class="ionicons ion-ios-navigate"></i>الزيارات السياحية</a>
+
+            <a href="#about" id="linkToabout" class="close-panel"><i class="ionicons ion-android-lock"></i>عن التطبيق </a>
+            <a data-popup=".popup-contact" class="open-popup close-panel"><i class="ionicons ion-android-lock"></i>تواصل معنا</a>
+
+        </div>
+    </div>
+    <!-- Views-->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class-->
+        <div class="view view-main">
+            <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-fixed">
+                <!-- LANDING Page-->
+                <div id="landingPage" data-page="landing" class="page landing">
+                    <div class="page-content no-bg-color" style="padding-bottom: 0 !important;">
+                        <div class="land">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- intro Page-->
+                <div id="introPage" data-page="intro" class="page cached intro">
+                    <a href="#" class="floating-button open-panel">
+                        <i class="ionicons ion-navicon-round"></i>
+                    </a>
+                    <div class="page-content">
+
+                        <div class="advHeader" id="intro-swiper-container">
+
+                        </div>
+
+
+                        <div class="newsTitles" id="newsSlider">
+
+                        </div>
+
+                        <a href="#news" class="button button-round moreNews">المزيد من الأخبار</a>
+
+                        <div class="row">
+                            <div class="col-100">
+                                <a href="#dalel" class="button button-round dark_green">دليل جازان</a>
+                            </div>
+                            <div class="col-50">
+                                <a href="#quiz" class="button button-round light_green">المسابقة الثقافية</a>
+                            </div>
+                            <div class="col-50">
+                                <a href="#tourist" class="button button-round white_green">الزيارات السياحية</a>
+                            </div>
+                            <div class="col-50">
+                                <a href="#!" data-popup=".popup-contact" class="open-popup button button-round blue">تواصل معنا</a>
+                            </div>
+                            <div class="col-50">
+                                <a id="btnTologin" href="#login" class="button button-round yellow">تسجيل دخول</a>
+                                <a id="btnTologout" class="button button-round yellow" style="display:none;">تسجيل الخروج</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-50">
+                                <!-- weather widget start --><div id="m-booked-bl-simple-week-vertical-27517">
+                                    <div class="booked-wzs-160-275 weather-customize" style="background-color:#000000; width:160px;" id="width1 "> <a target="_blank" class="booked-wzs-top-160-275" href="http://www.booked.net/"><img src="//s.bookcdn.com/images/letter/s5.gif" alt="book your hotel on Booked.net" /></a> <div class="booked-wzs-160-275_in"> <div class="booked-wzs-160-275-data"> <div class="booked-wzs-160-275-left-img wrz-01"></div> <div class="booked-wzs-160-275-right"> <div class="booked-wzs-day-deck"> <div class="booked-wzs-day-val"> <div class="booked-wzs-day-number"><span class="plus">+</span>33</div> <div class="booked-wzs-day-dergee"> <div class="booked-wzs-day-dergee-val">&deg;</div> <div class="booked-wzs-day-dergee-name">C</div> </div> </div> <div class="booked-wzs-day"> <div class="booked-wzs-day-d"><span class="plus">+</span>33&deg;</div> <div class="booked-wzs-day-n"><span class="plus">+</span>29&deg;</div> </div> </div> <div class="booked-wzs-160-275-info"> <div class="booked-wzs-160-275-city">جيزان</div> <div class="booked-wzs-160-275-date">الأحد, 07</div> </div> </div> </div> <a target="_blank" href="http://www.booked.net/weather/jizan-53099" class="booked-wzs-bottom-160-275"> <table cellpadding="0" cellspacing="0" class="booked-wzs-table-160"> <tr> <td class="week-day"> <span class="week-day-txt">الاثنين</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-03"></div></td> <td class="week-day-val"><span class="plus">+</span>32&deg;</td> <td class="week-day-val"><span class="plus">+</span>29&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">الثلاثاء</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-01"></div></td> <td class="week-day-val"><span class="plus">+</span>33&deg;</td> <td class="week-day-val"><span class="plus">+</span>28&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">الأربعاء</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-val"><span class="plus">+</span>35&deg;</td> <td class="week-day-val"><span class="plus">+</span>22&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">الخميس</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-val"><span class="plus">+</span>35&deg;</td> <td class="week-day-val"><span class="plus">+</span>23&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">الجمعة</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-val"><span class="plus">+</span>34&deg;</td> <td class="week-day-val"><span class="plus">+</span>23&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">السبت</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-val"><span class="plus">+</span>34&deg;</td> <td class="week-day-val"><span class="plus">+</span>22&deg;</td> </tr> </table> <div class="booked-wzs-center"> <span class="booked-wzs-bottom-l">أنظر إلى التنبؤ لسبعة أيام</span> </div> </a> </div> </div>
+                                    <script type="text/javascript"> var css_file = document.createElement("link"); css_file.setAttribute("rel", "stylesheet"); css_file.setAttribute("type", "text/css"); css_file.setAttribute("href", 'https://s.bookcdn.com/css/w/booked-wzs-widget-160x275.css?v=0.0.1'); document.getElementsByTagName("head")[0].appendChild(css_file); function setWidgetData(data) { if (typeof (data) != 'undefined' && data.results.length > 0) { for (var i = 0; i < data.results.length; ++i) { var objMainBlock = document.getElementById('m-booked-bl-simple-week-vertical-27517'); if (objMainBlock !== null) { var copyBlock = document.getElementById('m-bookew-weather-copy-' + data.results[i].widget_type); objMainBlock.innerHTML = data.results[i].html_code; if (copyBlock !== null) objMainBlock.appendChild(copyBlock); } } } else { alert('data=undefined||data.results is empty'); } } </script>
+                                    <script type="text/javascript" charset="UTF-8" src="https://widgets.booked.net/weather/info?action=get_weather_info&ver=6&cityID=53099&type=4&scode=124&ltid=3457&domid=w209&anc_id=78455&cmetric=1&wlangID=22&color=000000&wwidth=160&header_color=ffffff&text_color=333333&link_color=08488D&border_form=1&footer_color=ffffff&footer_text_color=333333&transparent=0"></script><!-- weather widget end -->
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="owl-carousel owl-pray" id="prayerSwiper">
+                                    <div class="item">
+                                        <div class="button button-round btn-block">
+                                            <div class="row">
+                                                <div class="col-100">
+                                                    <h2>الفجر</h2>
+                                                    <p>مواقيت الصلاة</p>
+                                                </div>
+                                                <div class="col-100">
+                                                    <br />
+                                                    <h2 id="fajr"></h2>
+                                                    <p>صباحاً</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="button button-round btn-block">
+                                            <div class="row">
+                                                <div class="col-100">
+                                                    <h2>الشروق</h2>
+                                                    <p>مواقيت الصلاة</p>
+                                                </div>
+                                                <div class="col-100">
+                                                    <br />
+                                                    <h2 id="shroukTime"></h2>
+                                                    <p>صباحاً</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="button button-round btn-block">
+                                            <div class="row">
+                                                <div class="col-100">
+                                                    <h2>الظهر</h2>
+                                                    <p>مواقيت الصلاة</p>
+                                                </div>
+                                                <div class="col-100">
+                                                    <br />
+                                                    <h2 id="DhuhrTime"></h2>
+                                                    <p>مساءاً</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="button button-round btn-block">
+                                            <div class="row">
+                                                <div class="col-100">
+                                                    <h2>العصر</h2>
+                                                    <p>مواقيت الصلاة</p>
+                                                </div>
+                                                <div class="col-100">
+                                                    <br />
+                                                    <h2 id="AsrTime"></h2>
+                                                    <p>مساءاً</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="button button-round btn-block">
+                                            <div class="row">
+                                                <div class="col-100">
+                                                    <h2>المغرب</h2>
+                                                    <p>مواقيت الصلاة</p>
+                                                </div>
+                                                <div class="col-100">
+                                                    <br />
+                                                    <h2 id="MaghribTime"></h2>
+                                                    <p>مساءاً</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="button button-round btn-block">
+                                            <div class="row">
+                                                <div class="col-100">
+                                                    <h2>العشاء</h2>
+                                                    <p>مواقيت الصلاة</p>
+                                                </div>
+                                                <div class="col-100">
+                                                    <br />
+                                                    <h2 id="IshaTime"></h2>
+                                                    <p>مساءاً</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- LOGIN Page-->
+                    <div id="loginPage" data-page="login" class="page cached login">
+                        <div class="page-content">
+                            <div class="logo-cont"> <img src="img/logo.png" /> </div>
+                            <div class="list-block">
+                                <ul>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ionicons ion-android-person"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="loginEmail" type="text" placeholder="الاسم">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="Loginpassword" type="password" placeholder="كلمة المرور">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <a id="linkForgetPassword" href="#"><p class="txt">هل نسيت كلمة المرور ؟</p></a>
+                                <p><a id="btnLogin" class="button button-round white_green">تسجيل دخول</a></p>
+                                <div class="social">
+                                    <a id="facebookLogin" href="#"><img src="img/facebook.png" /></a>
+                                    <a id="twitterLogin" href="#"><img src="img/twitter.png" /></a>
+                                    <a id="googlePlusLogin" href="#"><img src="img/google-plus.png" /></a>
+                                </div>
+                                <div class="row signup_btn">
+                                    <div class="col-50">
+                                        <p>
+                                            <a id="visitorSignUp" href="#" class="button button-round light_green">تسجيل زائر</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-50">
+                                        <p>
+                                            <a id="projectOwnerSignUp" href="#" class="button button-round yellow">تسجيل صاحب مشروع</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <p><a href="#intro" class="button button-round dark_green">تخطى</a></p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- signupVisitor Page-->
+                    <div id="signupVisitorPage" data-page="signupVisitor" class="page cached login">
+                        <div class="page-content">
+                            <div class="logo-cont">
+                                <img src="img/logo.png" />
+                            </div>
+                            <form class="list-block" id="sign-up-form" data-parsley-validate="">
+                                <ul>
+                                    <li id="liFullName">
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ionicons ion-android-person"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="signup-txtFullName" type="text" placeholder="الاسم الثلاثي" required
+                                                           data-parsley-required-message="يجب ادخال الاسم الثلاثي">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li id="liUserName">
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ion-person-stalker"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="signup-txtUserName" type="text" placeholder="اسم المستخدم" required
+                                                           data-parsley-required-message="يجب ادخال اسم المستخدم"
+                                                           data-parsley-pattern="[A-Za-z0-9]+"
+                                                           data-parsley-pattern-message="أدخل اسم المستخدم باللغة الانجليزية ومن غير مسافات">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li id="liEmail">
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="signup-txtEmail" type="email" placeholder="البريد الإلكترونى" required
+                                                           data-parsley-required-message="يجب ادخال البريد الإلكترونى"
+                                                           data-parsley-type="email"
+                                                           data-parsley-type-message="أدخل البريد الإلكتروني بطريقة صحيحة">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li id="liMobile">
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ionicons ion-android-phone-portrait"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="signup-txtMobile" type="tel" placeholder="رقم الجوال" required
+                                                           data-parsley-required-message="يجب ادخال رقم الجوال"
+                                                           data-parsley-type="number"
+                                                           data-parsley-length="[10, 10]"
+                                                           data-parsley-length-message="رقم الجوال يجب أن يكون عشرة أرقام فقط"
+                                                           data-parsley-type-message="أدخل رقم الجوال بطريقة صحيحة">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li id="liPassword">
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="signup-txtPassword" type="password" placeholder="كلمة المرور" required
+                                                           data-parsley-required-message="يجب ادخال كلمة المرور"
+                                                           minlength="6"
+                                                           data-parsley-minlength="6"
+                                                           data-parsley-minlength-message="كلمة المرور الجديدة يجب ألا تقل عن ستة خانات">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li id="liConfirmPassword">
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="signup-txtConfirmPassword" type="password" placeholder="تأكيد كلمة المرور"
+                                                           required data-parsley-equalto="#signup-txtPassword"
+                                                           data-parsley-required-message="يجب ادخال تأكيد كلمة المرور"
+                                                           data-parsley-equalto-message="كلمتا المرور غير متطابقتين">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <p><a id="userSignUp" href="#" class="button button-round white_green">تسجيل دخول</a></p>
+                                <p><a id="userSignUpBack" href="#" class="button button-round white_green">عودة</a></p>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- activationCode Page-->
+                    <div id="activationCodePage" data-page="activationCode" class="page cached login">
+                        <div class="page-content">
+                            <div class="logo-cont"> <img src="img/logo.png" /> </div>
+                            <form class="list-block" id="reset-activation-code" data-parsley-validate="">
+                                <ul>
+                                    <li id="liCode">
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input id="txtCode" type="text" placeholder="كود التفعيل" required
+                                                           data-parsley-required-message="يجب ادخال كود التفعيل">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <p><a id="sendActivationCode" href="#" class="button button-round white_green">إرسال</a></p>
+                                <p><a id="sendActivateCodeAgain" href="#" class="button button-round white_green">إعادة إرسال كود التفعيل</a></p>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Forget Password Page-->
+                    <div id="forgetPasswordPage" data-page="forgetPassword" class="page cached login">
+                        <div class="page-content">
+                            <div class="logo-cont"> <img src="img/logo.png" /> </div>
+                            <div class="login_form">
+                                <form class="list-block" id="forgot-password-page-form" data-parsley-validate>
+                                    <ul>
+                                        <li id="forgetPasswordEmail">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="ionicons ion-android-phone-portrait"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                        <input id="txtForgetPasswordEmail"
+                                                               type="email"
+                                                               class="lang"
+                                                               placeholder="أدخل بريدك الإلكتروني"
+                                                               data-parsley-type="email"
+                                                               data-parsley-type-message="أدخل البريد الإلكتروني بطريقة صحيحة"
+                                                               required=""
+                                                               data-parsley-required-message="يجب ادخال البريد الإلكترونى">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                </form>
+                                <p><a id="btnSendEmail" href="#" class="button button-round white_green">إرسال</a></p>
+                                <p><a id="btnBackFromForgetPassword" href="#" class="button button-round white_green">عودة</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Change Password Page-->
+                    <div id="changePasswordPage" data-page="changePassword" class="page cached login">
+                        <div class="page-content">
+                            <div class="logo-cont"> <img src="img/logo.png" /> </div>
+                            <div class="login_form">
+                                <form class="list-block" id="change-password-page" data-parsley-validate>
+                                    <ul>
+                                        <li id="liChangeOldPassword">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="ionicons ion-locked"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                        <input id="txtChangeOldPassword"
+                                                               type="password"
+                                                               class="lang"
+                                                               placeholder="أدخل كلمة السر القديمة"
+                                                               data-parsley-required-message="يجب إدخال كلمة السر القديمة"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li id="liChangeNewPassword">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="ionicons ion-locked"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                        <input id="txtChangeNewPassword" type="password" class="lang" placeholder="أدخل كلمة السر الجديدة"
+                                                               data-parsley-required-message="يجب إدخال كلمة السر الجديدة"
+                                                               minlength="6"
+                                                               data-parsley-minlength="6"
+                                                               data-parsley-minlength-message="كلمة المرور الجديدة يجب ألا تقل عن ستة خانات"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li id="liChangeConfirmNewPassword">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="ionicons ion-locked"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                        <input id="txtChangeConfirmNewPassword" type="password" class="lang"
+                                                               placeholder="أعد إدخال كلمة السر الجديدة"
+                                                               data-parsley-required-message="يجب تأكيد كلمة السر الجديدة"
+                                                               data-parsley-equalto="#txtChangeNewPassword"
+                                                               data-parsley-equalto-message="كلمتا المرور غير متطابقتين"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </form>
+                                <p><a id="btnChangePassword" href="#" class="button button-round white_green">تغيير</a></p>
+                                <p><a id="btnPasswordBackToHome" href="#" class="button button-round white_green back">عودة</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Reset Password Page-->
+                    <div id="resetPasswordPage" data-page="resetPassword" class="page cached login">
+                        <div class="page-content">
+                            <div class="logo-cont"> <img src="img/logo.png" /> </div>
+                            <div class="login_form">
+                                <form class="list-block" data-parsley-validate="" id="reset-password-page-form">
+                                    <ul>
+                                        <li id="resetCode">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="ionicons ion-code"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                        <input id="txtResetCode"
+                                                               type="text"
+                                                               placeholder="أدخل الكود"
+                                                               required
+                                                               data-parsley-required-message="يجب ادخال الكود">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                        <li id="resetPassword">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="ionicons ion-locked"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                        <input id="txtResetPassword" type="password" placeholder="أدخل كلمة السر الجديدة"
+                                                               minlength="6"
+                                                               data-parsley-minlength="6"
+                                                               data-parsley-minlength-message="كلمة المرور الجديدة يجب ألا تقل عن ستة خانات"
+                                                               required
+                                                               data-parsley-required-message="يجب ادخال كلمة المرور الجديدة">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                        <li id="resetConfirmPassword">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="ionicons ion-locked"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                        <input id="txtResetConfirmPassword" type="password" placeholder="أعد إدخال كلمة السر الجديدة"
+                                                               required=""
+                                                               data-parsley-equalto="#txtResetPassword"
+                                                               data-parsley-required-message="يجب تأكيد كلمة السر الجديدة"
+                                                               data-parsley-equalto-message="كلمتا المرور غير متطابقتين">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                </form>
+                                <p><a id="btnResetPassword" href="#" class="button button-round white_green">تغيير كلمة السر</a></p>
+                                <p><a id="btnResetPasswordBackToHome" href="#" class="button button-round white_green">عودة</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- dalel Page-->
+                    <div id="dalelPage" data-page="dalel" class="page cached dalel">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div class="page-content">
+                            <div class="advHeader" id="dalel-swiper-container">
+
+                            </div>
+                            <h2 class="title">دليل جازان</h2>
+                            <div id="dalelCategories" class="row cards">
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- notification Page-->
+                    <div id="notificationPage" data-page="notification" class="page cached placeDetails notification">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div class="page-content infinite-scroll" id="user-notification-infinite">
+                            <div class="advHeader" id="notification-swiper-container">
+
+                            </div>
+                            <h2 class="title">الإشعارات</h2>
+                            <div id="user-notification-wrapper">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- about Page-->
+                    <div id="aboutPage" data-page="about" class="page cached placeDetails">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div class="page-content">
+                            <div class="advHeader" id="about-swiper-container">
+
+                            </div>
+                            <h2 class="title">عن التطبيق</h2>
+                            <div id="about-us-wrapper">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- advertisments Page-->
+                    <div id="advertismentsPage" data-page="advertisments" class="page cached dalel">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div id="AdsScrollDiv" class="page-content infinite-scroll">
+                            <div class="advHeader" id="advertisments-swiper-container">
+
+                            </div>
+                            <h2 class="title">الإعلانات</h2>
+                            <div class="row cards" id="AdscontainerDiv">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- news Page-->
+                    <div id="newsPage" data-page="news" class="page cached dalel news">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div id="news-infinite" class="page-content infinite-scroll">
+                            <div class="advHeader" id="news-swiper-container">
+
+                            </div>
+                            <h2 class="title">الأخبار</h2>
+                            <div id="news-wrapper" class="row cards">
+
+
+
+
+
+                            </div>
+                            <div id="divNoAds" style="display: none" class="divAlert">
+                                <p class="pNotification" id="noAds">لا يوجد اعلانات</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- advertismentsDetails Page-->
+                    <div id="advertismentsDetailsPage" data-page="advertismentsDetails" class="page cached placeDetails login">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div class="page-content">
+                            <div class="advHeader" id="advertismentsDetails-swiper-container">
+
+                            </div>
+                            <h2 class="title">تفاصيل الإعلان</h2>
+                            <div class="card" id="advertisments-details-wrapper">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--userProfile Page-->
+                    <div id="advertismentsProfilePage" data-page="advertismentsProfile" class="page cached dalel profile login">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel"> <i class="ionicons ion-navicon-round"></i> </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button left_btn back"> <i class="ionicons ion-android-arrow-back"></i> </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" id="linkOpenUserProfilePopup" class="floating-button add_btn "> <i class="ionicons ion-compose"></i> </a>
+                        <div class="page-content">
+                            <div class="advHeader" id="advertismentsProfile-swiper-container">
+
+                            </div>
+                            <h2 class="title">الصفحة الشخصية</h2>
+                            <div class="placeDetails">
+                                <div class="card projectOwnerProfile">
+                                    <div class="row">
+                                        <div class="img_content"> <img id="userImage" src="" /> </div>
+                                        <div class="col-100">
+                                            <h3><span id="userName"></span></h3>
+                                        </div>
+                                        <div class="col-100" id="user-email-wrapper">
+                                            <p> <i class="ionicons ion-android-mail"></i> <span id="userEmail"></span>  </p>
+                                        </div>
+                                        <div class="col-100">
+                                            <p> <i class="ionicons ion-android-phone-portrait"></i> <span id="userMobile"></span> </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#advertismentsProfileProjects" class="button button-round dark_green">المشاريع</a>
+                            <a href="#advertismentsProfileVisits" class="button button-round dark_green">الزيارات السياحية</a>
+                        </div>
+                    </div>
+                    <!-- ProfileProjects Page-->
+                    <div id="advertismentsProfileProjectsPage" data-page="advertismentsProfileProjects" class="page cached dalel profile">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel"> <i class="ionicons ion-navicon-round"></i> </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button left_btn back"> <i class="ionicons ion-android-arrow-back"></i> </a>
+                        <div id="projectsInfinite" class="page-content infinite-scroll">
+                            <div class="advHeader" id="advertismentsProfileProjects-swiper-container">
+
+                            </div>
+                            <h2 class="title">المشاريع</h2>
+
+                            <div id="personalProjects" class="row cards">
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ProfileVisits Page-->
+                    <div id="advertismentsProfileVisitsPage" data-page="advertismentsProfileVisits" class="page cached dalel profile">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel"> <i class="ionicons ion-navicon-round"></i> </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button left_btn back"> <i class="ionicons ion-android-arrow-back"></i> </a>
+                        <div id="visitsInfinte" class="page-content infinite-scroll">
+                            <div class="advHeader" id="advertismentsProfileVisits-swiper-container">
+
+                            </div>
+                            <h2 class="title">الزيارات السياحية</h2>
+
+                            <div id="usersVisits" class="row cards">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- touristVisitProfileDetails Page-->
+                    <div id="touristVisitProfileDetails" data-page="touristVisitProfileDetails" class="page cached placeDetails login advertismentsProfileDetails">
+                        <!-- Floating Action Button
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button left_btn back">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <a id="btnEditPersonalTouristDetail" href="#" class="floating-button add_btn ">
+                            <i class="ionicons ion-compose"></i>
+                        </a>
+                        <div class="page-content">
+                            <div class="advHeader" id="touristVisitProfileDetails-swiper-container">
+
+                            </div>
+                            <h2 class="title">تفاصيل الزيارة</h2>
+
+                            <div class="card">
+                                <div id="touristDetails" class="row">
+                                    <div class="col-100">
+                                        <p class="rate">
+                                            <i class="ionicons ion-cube"></i>
+                                            <span id="txtTouristName"> </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-100 agree">
+                                        <h3 id="labelTouristDetailsApproved"><i class="ionicons ion-checkmark-round"></i>تم قبول الزيارة السياحية</h3>
+                                    </div>
+                                    <div class="col-100 refuse">
+                                        <h3 id="labelTouristDetailsRefuse"><i class="ionicons ion-close-round"></i>في انتظار الموافقة على الزيارة السياحية</h3>
+                                    </div>
+                                    <div class="col-100">
+                                        <p class="rate">
+                                            <i class="ion ion-android-calendar"></i>
+                                            <span id="txtTouristDate"> </span>
+                                        </p>
+                                    </div>
+                                    <div id="" class="col-100">
+                                        <p class="rate">
+                                            <i class="ionicons ion-ios-home"></i>
+                                            <span id="txtTouristCityName"> </span>
+                                        </p>
+                                    </div>
+
+
+                                    <div id="touristImages" class="row">
+
+                                    </div>
+                                    <a id="btnDeleteUserTouristPicture" href="#" class="button button-round red">حذف صور</a>
+                                    <div id="touristVideos" class="row">
+
+                                    </div>
+                                    <a id="btnDeleteUserVideo" href="#" class="button button-round red">حذف الفيديو</a>
+
+
+
+                                    <div class="col-100">
+                                        <p><i class="ionicons ion-document-text"></i> <span id="pTouristDetails"></span> تفاصيل الزيارة </p>
+                                    </div>
+                                    <div class="col-100" id="personal-tourist-map-wrapper">
+                                        <div id="personal-tourist-map" style="height:200px !important;width:100%"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- advertismentsProfileDetails Page-->
+                    <div id="advertismentsProfileDetailsPage" data-page="advertismentsProfileDetails" class="page cached placeDetails login advertismentsProfileDetails">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button left_btn back">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <!--<a href="#" data-popup=".popup-advertismentDetailsEdit" class="floating-button add_btn open-popup">
+                            <i class="ionicons ion-compose"></i>
+                        </a>-->
+                        <a id="btnEditPersonalAdvertisementDetail" href="#" class="floating-button add_btn ">
+                            <i class="ionicons ion-compose"></i>
+                        </a>
+                        <div class="page-content">
+                            <div class="advHeader" id="advertismentsProfileDetails-swiper-container">
+
+                            </div>
+                            <h2 class="title">تفاصيل المشروع</h2>
+
+                            <div class="card">
+                                <div id="projectDetails" class="row">
+                                    <div class="col-100">
+                                        <h3 id="txtProjectName"></h3>
+                                    </div>
+                                    <div class="col-100 agree">
+                                        <h3 id="labelProjectApproved"><i class="ionicons ion-checkmark-round"></i>تم قبول المشروع </h3>
+                                    </div>
+                                    <div class="col-100 refuse">
+                                        <h3 id="labelProjectRefuse"><i class="ionicons ion-close-round"></i>في انتظار الموافقة على المشروع</h3>
+                                    </div>
+                                    <div class="col-100">
+                                        <p id="labelView" class="rate">
+                                            <i class="ionicons ion-eye"></i> 2540
+                                        </p>
+                                    </div>
+
+
+                                    <div id="" class="col-100">
+                                        <p id="txtCityName" class="rate">
+                                            <i class="ionicons ion-home"></i>
+                                            اسم المدينة
+                                        </p>
+                                    </div>
+                                    <div class="col-100">
+                                        <p id="labelCategoryName"></p>
+                                    </div>
+                                    <div id="" class="col-100">
+                                        <p id="txtAdvertisementDuration" class="rate">
+                                            <i class="ion-android-hand"></i>
+                                            سيتم الانتهاء من الاعلان بعد 5 ايام
+                                        </p>
+                                    </div>
+                                    <div class="col-100">
+                                        <label id="labelBackageType" class="diamond"></label>
+                                    </div>
+
+                                    <div id="projectImages" class="row">
+                                    </div>
+                                    <a id="btnDeleteUserProjectPicture" href="#" class="button button-round red">حذف صور</a>
+
+
+                                    <div class="col-100">
+                                        <p id="padvertisementDetails">هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي" فتجعلها تبدو (أي الأحرف) وكأنها نص مقروء. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم إيبسوم بشكل إفتراضي كنموذج عن النص، وإذا قمت بإدخال "lorem ipsum" في أي محرك بحث ستظهر العديد من المواقع الحديثة العهد في نتائج البحث. على مدى السنين ظهرت نسخ جديدة ومختلفة من نص لوريم إيبسوم، أحياناً عن طريق الصدفة، وأحياناً عن عمد كإدخال بعض العبارات الفكاهية إليها.</p>
+                                    </div>
+                                    <div class="col-100" id="personal-advertisement-map-wrapper">
+                                        <div id="personal-advertisement-map" style="height:200px !important;width:100%"></div>
+
+                                    </div>
+                                    <div class="col-100 time" id="personal-user-project-details-working-time-wrapper">
+                                        <p>
+                                            <i class="ionicons ion-clock"></i>
+                                            <span id="personal-user-project-details-working-time"></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-100 time" id="personal-user-project-details-project-start-date-wrapper">
+                                        <p>
+                                            <i class="ionicons ion-android-calendar"></i>
+                                            <span id="personal-user-project-details-project-start-date"></span>
+                                        </p>
+                                    </div>
+                                    <div class="col-100 time" id="personal-user-project-details-project-end-date-wrapper">
+                                        <p>
+                                            <i class="ionicons ion-android-calendar"></i>
+                                            <span id="personal-user-project-details-project-end-date"></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-100 contact">
+                                        <h3>
+                                            بيانات التواصل
+                                        </h3>
+                                        <p id="pUserPhone"><i class="ionicons ion-android-phone-portrait"> </i><span id="userPhoneContact"></span> </p>
+                                        <p id="pUserEmailContact"><i class="ionicons ion-android-mail"> </i><span id="userMailContact"></span> </p>
+                                        <p id="pUserWebsite"><i class="ionicons ion-android-globe"></i> <span id="userWebsiteContact"></span> </p>
+                                        <p id="pUserTwitter"><i class="ionicons ion-social-twitter"></i> <span id="userTwitterContact"></span> </p>
+                                        <p id="pUSerFaceBook"><i class="ionicons ion-social-facebook"></i> <span id="userFacebookContact"></span> </p>
+                                        <p id="pUserInstgram"> <i class="ionicons ion-social-instagram"></i> <span id="userInstgramContact"></span> </p>
+                                        <p id="pUserSnapChat"><i class="ion-aperture"></i> <span id="userSnapChatContact"></span> </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- addAdvertisment Page-->
+                    <div id="addAdvertismentPage" data-page="addAdvertisment" class="page cached advertisment login">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div class="page-content">
+                            <div class="advHeader" id="addAdvertisment-swiper-container">
+
+                            </div>
+                            <h2 class="title">إختر ما يناسبك من الاعلانات</h2>
+                            <div id="packageType">
+                                <p>
+
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- categoryDetails Page-->
+                    <div id="categoryDetailsPage" data-page="categoryDetails" class="page cached dalel">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div class="page-content">
+                            <div class="advHeader" id="categoryDetails-swiper-container">
+
+                            </div>
+                            <h2 class="title" id="category-details-title"></h2>
+                            <div id="subCategories" class="row cards">
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- place Page-->
+                    <div id="placePage" data-page="place" class="page cached place dalelPlace">
+
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div id="placesInfinte" class="page-content infinite-scroll">
+                            <div class="advHeader" id="place-swiper-container">
+
+                            </div>
+                            <h2 class="title" id="place-category-name"></h2>
+
+
+
+                            <div id="place">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- Tourist Page-->
+                    <div id="touristPage" data-page="tourist" class="page cached place tourist">
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a id="addTourist" href="#" class="floating-button add_btn">
+                            <i class="ionicons ion-plus"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div id="touristInfinite" class="page-content infinite-scroll">
+
+                            <div class="advHeader" id="tourist-swiper-container">
+
+                            </div>
+                            <h2 class="title">الزيارات سياحية</h2>
+                            <div id="visitAdd">
+                                <div id="touristVisit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- placeDetails Page-->
+                    <div id="placeDetailsPage" data-page="placeDetails" class="page cached placeDetails login">
+
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button open-panel">
+                            <i class="ionicons ion-navicon-round"></i>
+                        </a>
+                        <!-- Floating Action Button -->
+                        <a href="#" class="floating-button back left_btn">
+                            <i class="ionicons ion-android-arrow-back"></i>
+                        </a>
+                        <div id="commentsInfinite" class="page-content infinite-scroll">
+
+                            <div class="advHeader" id="placeDetails-swiper-container">
+
+                            </div>
+                            <h2 class="title">تفاصيل المكان</h2>
+
+                            <div class="card">
+                                <div class="col-100">
+                                    <h3 id="txtPlaceName"></h3>
+                                </div>
+
+                                <div id="divPlaceDetailRate" class="col-100">
+
+                                </div>
+
+                                <div class="col-100">
+                                    <label id="labelPackageType" class="diamond"></label>
+                                </div>
+                                <div id="divPlaceImages">
+
+                                </div>
+
+                                <div class="col-100">
+                                    <p id="placeDetails"></p>
+                                </div>
+                                <div class="col-100" height="200px">
+                                    <div id="place-details-map" style="height:200px !important;width:100%"></div>
+                                </div>
+                                <div class="col-100">
+                                    <p id="place-details-working-hours">  الدوام من 08:00 صباحاً إلى 06:00 مساءاً </p>
+                                </div>
+                                <div class="col-100">
+                                    <p id="place-details-email" class="phone-number">  البريد الإلكترونى </p>
+                                </div>
+                                <div class="col-100">
+                                    <p id="place-details-website" class="phone-number">  الموقع الإلكترونى </p>
+                                </div>
+                                <div class="col-100">
+                                    <p id="place-details-phone-number" class="phone-number"> 0123456789 </p>
+                                </div>
+                                <div class="col-100">
+                                    <div class="social">
+                                        <a id="place-details-facebook"><img src="img/facebook.png"></a>
+                                        <a id="place-details-twitter"><img src="img/twitter.png"></a>
+                                        <a id="place-details-instagram"><img src="img/instagram.png"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card rate">
+                                <div class="row">
+
+                                    <div class="col-100">
+                                        <h3 id="MyRate">فضلاً اترك تقييمك</h3>
+                                    </div>
+                                    <div class="col-100">
+                                        <div id="placeRate" class="rateyo">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="card rate">
+                                <div class="row">
+                                    <div class="col-100">
+                                        <h3>فضلاً اترك تعليقك</h3>
+                                    </div>
+                                    <div class="col-100">
+                                        <div class="list-block">
+                                            <ul>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-media"><i class="ionicons ion-document-text"></i></div>
+                                                        <div class="item-inner">
+                                                            <div class="item-input">
+                                                                <textarea id="txtAreaComment" type="text" placeholder="التعليق"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a id="btnSendComment" href="#" class="button button-round blue">إرسال</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul id="comments" class="chatui">
+                                <li>
+                                    <div class="chatavatar"> <img src="img/profile.jpg" alt="avatar"> </div>
+                                    <div class="column-right chat">
+                                        <div class="arrow-globe">
+
+                                        </div>
+                                        <div class="chat-text"> </div>
+                                        <div class="chat-time"></div>
+                                    </div>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <!--<div id="divCommentNotification" class="divAlert">
+                                <p class="pNotification"> لا يوجد تعليقات </p>
+                            </div>-->
+                            <!-- touristDetails Page-->
+                            <div id="touristDetailsPage" data-page="touristDetails" class="page cached placeDetails login">
+                                <!-- Floating Action Button -->
+                                <a href="#" class="floating-button open-panel">
+                                    <i class="ionicons ion-navicon-round"></i>
+                                </a>
+                                <!-- Floating Action Button -->
+                                <a href="#" class="floating-button back left_btn">
+                                    <i class="ionicons ion-android-arrow-back"></i>
+                                </a>
+                                <div class="page-content infinite-scroll" id="tourist-comments-infinite">
+                                    <div class="advHeader" id="touristDetails-swiper-container">
+
+                                    </div>
+                                    <h2 class="title">تفاصيل المكان</h2>
+                                    <div class="card">
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <h3 id="tourist-details-page-location-name"></h3>
+                                            </div>
+                                            <div class="col-100">
+                                                <h3><i class="ion ion-android-calendar"></i> <span id="tourist-details-page-location-visit-date"></span></h3>
+                                            </div>
+                                            <div class="col-100">
+                                                <div id="tourist-details-page-location-visit-rating"></div>
+                                            </div>
+                                            <div class="col-100">
+                                                <p>
+                                                    <i class="ionicons ion-person"></i>
+                                                    <span id="tourist-details-page-location-visit-visitor-name"></span>
+                                                </p>
+                                            </div>
+                                            <div id="tourist-details-page-images-wrapper" class="row">
+
+                                            </div>
+                                            <div class="col-100">
+                                                <p id="tourist-details-page-location-visit-description"></p>
+                                            </div>
+                                            <div class="col-100" height="200px">
+
+                                                <div id="tourist-details-map" style="height:200px !important;width:100%"></div>
+
+
+
+                                                <p><i class="ion ion-android-map"></i> <span id="tourist-details-page-location-city-name"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card rate">
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <h3>فضلاً اترك تقييمك</h3>
+                                            </div>
+                                            <div class="col-100">
+                                                <div class="rateyo" id="tourist-details-page-location-calc-visit-rating"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card rate">
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <h3>فضلاً اترك تعليقك</h3>
+                                            </div>
+                                            <div class="col-100">
+                                                <div class="list-block">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="item-content">
+                                                                <div class="item-media"><i class="ionicons ion-document-text"></i></div>
+                                                                <div class="item-inner">
+                                                                    <div class="item-input">
+                                                                        <textarea type="text" placeholder="التعليق" id="tourist-details-page-location-comment-text-area"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" id="tourist-details-page-location-send-comment" class="button button-round blue">إرسال</a>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-100">
+                                                <div id="tourist-visits-comment" class="chatui">
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- newsDetails Page-->
+                            <div id="newsDetailsPage" data-page="newsDetails" class="page cached placeDetails newsDetails login">
+                                <!-- Floating Action Button -->
+                                <a href="#" class="floating-button open-panel">
+                                    <i class="ionicons ion-navicon-round"></i>
+                                </a>
+                                <!-- Floating Action Button -->
+                                <a href="#" class="floating-button back left_btn">
+                                    <i class="ionicons ion-android-arrow-back"></i>
+                                </a>
+                                <div class="page-content">
+                                    <div class="advHeader" id="newsDetails-swiper-container">
+
+                                    </div>
+                                    <h2 class="title">تفاصيل الخبر</h2>
+                                    <div class="card" id="news-warpper">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- quiz Page-->
+                            <div id="quizPage" data-page="quiz" class="page cached quiz">
+                                <!-- Floating Action Button -->
+                                <a href="#" class="floating-button open-panel">
+                                    <i class="ionicons ion-navicon-round"></i>
+                                </a>
+                                <!-- Floating Action Button -->
+                                <a href="#" class="floating-button back left_btn">
+                                    <i class="ionicons ion-android-arrow-back"></i>
+                                </a>
+                                <div class="page-content">
+                                    <div class="advHeader" id="cultural-competition-swiper">
+
+                                    </div>
+                                    <h2 class="title">المسابقة الثقافية</h2>
+                                    <div class="card">
+                                        <h2 id="txtQuestionTitle"></h2>
+                                        <p id="txtQuestionBody"></p>
+                                    </div>
+
+                                    <div class="card rate">
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <h3>فضلاً سجل إجابتك لتربح معنا بجوائز قيمة وأضافة صورتك واسمك بصفحة الفائزين</h3>
+                                            </div>
+                                            <div class="col-100">
+                                                <form class="list-block" id="add-cultural-competition-answer" data-parsley-validate="">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="item-content">
+                                                                <div class="item-media"><i class="ionicons ion-document-text"></i></div>
+                                                                <div class="item-inner">
+                                                                    <div class="item-input">
+                                                                        <textarea id="textAreaUserAnswer"
+                                                                                  type="text"
+                                                                                  required
+                                                                                  placeholder="الإجابة"
+                                                                                  data-parsely-required
+                                                                                  data-parsley-required-message="يجب ادخال الاجابة"
+                                                                                  data-parsley-maxlength="500"
+                                                                                  data-parsley-maxlength-message="الاجابة يجب ان لا تزيد عن 500 حرف"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" id="btnSendUserAnswer" class="button button-round blue">إرسال</a>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <h2>الفائزين</h2>
+                                        <div id="winners" class="row">
+
+
+                                        </div>
+                                    </div>
+                                    <!--<div id="divQuizNotification" class="divAlert">
+                                        <p class="pNotification"> لا يوجد فائزين </p>
+                                    </div>-->
+                                </div>
+                            </div>
+                            <!-- AddProjectDetails Page-->
+                            <div id="addProjectDetailsPage" data-page="addProjectDetails" class="page cached advertismentDetails">
+                                <!-- Floating Action Button -->
+                                <a href="#" class="floating-button open-panel">
+                                    <i class="ionicons ion-navicon-round"></i>
+                                </a>
+                                <!-- Floating Action Button -->
+                                <a href="#" class="floating-button back left_btn">
+                                    <i class="ionicons ion-android-arrow-back"></i>
+                                </a>
+                                <div class="navbar">
+                                    <div class="navbar-inner">
+                                        <div class="center">إضافة مشروع</div>
+                                    </div>
+                                </div>
+                                <div class="page-content">
+                                    <form class="list-block" id="add-project-details" data-parsley-validate>
+                                        <ul>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-cube"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtAdName" type="text" placeholder="اسم المشروع" required
+                                                                   data-parsley-required-message="يجب ادخال اسم المشروع"
+                                                                   data-parsley-maxlength="250"
+                                                                   data-parsley-maxlength-message="اسم المشروع يجب ان لا يزيد عن 250 حرف">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-ios-home"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtCiName" type="text" placeholder="المدينة" required
+                                                                   data-parsley-maxlength="250"
+                                                                   data-parsley-maxlength-message="اسم المدينة يجب ان لا يزيد عن 250 حرف"
+                                                                   data-parsley-required-message="يجب ادخال المدينة">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <!--<a id="mainCategoryOptionSelect" href="#" data-open-in="picker" data-picker-close-text="إغلاق" class="item-link smart-select" />-->
+
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-android-list"></i></div>
+                                                    <div class="item-inner">
+                                                        <select id="mainCategoryOption" name="gategory" required
+                                                                data-parsley-required-message="يجب ادخال التصنيف الرئيسي">
+                                                            <option value="" selected disabled> التصنيف الرئيسي </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!--</a>-->
+                                            </li>
+                                            <li>
+                                                <!--<a href="#" data-open-in="picker" data-picker-close-text="إغلاق" class="item-link smart-select">-->
+
+
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-android-list"></i></div>
+                                                    <div class="item-inner">
+                                                        <select id="subMainCategoryOption" name="subGategory" required
+                                                                data-parsley-required-message="يجب ادخال التصنيف الفرعى">
+                                                            <option value="" selected disabled>التصنيف الفرعى</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!--</a>-->
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-document-text"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <textarea id="textAreaAdvertisementDetails" type="text" placeholder="معلومات عن المشروع" required
+                                                                      data-parsley-required-message="يجب ادخال معلومات عن المشروع"
+                                                                      data-parsley-maxlength="1000"
+                                                                      data-parsley-maxlength-message="معلومات عن المشروع يجب ان لا تزيد عن 1000 حرف"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                            <li id="mainPicShow">
+                                                <div class="img_content mainPic">
+                                                    <img id="mainPicSrc" src="img/profile.jpg" />
+                                                </div>
+                                                <p><a id="btnAddAdvertisementProfilePic" href="#!" class="button button-round light_green">إضافة صورة رئيسية</a></p>
+                                                <i class="hint"> يرجى اختيار صورة بالابعاد التالية 350 * 125  </i>
+                                            </li>
+                                            <li>
+                                                <div class="row" id="subMainPicShow">
+
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <p><a id="btnAddAdvertisementSubPicture" href="#" class="button button-round light_green">إضافة صورة</a></p>
+                                            </li>
+
+                                            <li id="mapShow">
+
+
+                                                <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10798.32982419464!2d42.57541822574701!3d16.886471411910463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1607e2973d13a0bb%3A0x35737d6f29786cf2!2z2KzYp9iy2KfZhiDYp9mE2LPYudmI2K_Zitip!5e0!3m2!1sar!2seg!4v1484225775197" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-android-time"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtTimingHours" type="text" placeholder="أوقات الدوام">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>وسائل التواصل</li>
+                                            <li id="mobileShow">
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-android-phone-portrait"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtMobile"
+                                                                   type="tel"
+                                                                   placeholder="رقم الجوال"
+                                                                   data-parsley-required-message="يجب ادخال رقم الجوال"
+                                                                   data-parsley-type="number"
+                                                                   data-parsley-length="[10, 10]"
+                                                                   data-parsley-length-message="رقم الجوال يجب أن يكون عشرة أرقام فقط"
+                                                                   data-parsley-type-message="أدخل رقم الجوال بطريقة صحيحة">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="emailShow">
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtEmail" type="email" placeholder="البريد الإلكترونى"
+                                                                   data-parsley-maxlength="250"
+                                                                   data-parsley-maxlength-message="البريد الإلكترونى يجب ان لا يزيد عن 250 حرف">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="websiteShow">
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-android-globe"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtWebsite" placeholder="الموقع الإلكترونى"
+                                                                   data-parsley-maxlength="250"
+                                                                   data-parsley-maxlength-message="الموقع الإلكترونى يجب ان لا يزيد عن 250 حرف"
+                                                                   type="text"
+                                                                   data-parsley-pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                                                                   data-parsley-pattern-message="ادخل الرابط بشكل صحيح">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="twitterShow">
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-social-twitter"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtTwitter" placeholder="تويتر"
+                                                                   data-parsley-maxlength="250"
+                                                                   data-parsley-maxlength-message="تويتر يجب ان لا يزيد عن 250 حرف"
+                                                                   type="text"
+                                                                   data-parsley-pattern="https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                                                                   data-parsley-pattern-message="ادخل الرابط بشكل صحيح">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="facebookShow">
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-social-facebook"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtFacebook" placeholder="فيسبوك"
+                                                                   data-parsley-maxlength="250"
+                                                                   data-parsley-maxlength-message="فيسبوك يجب ان لا يزيد عن 250 حرف"
+                                                                   type="text"
+                                                                   data-parsley-pattern="https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                                                                   data-parsley-pattern-message="ادخل الرابط بشكل صحيح">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="instgramShow">
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-social-instagram"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtInstgram" placeholder="انستجرام"
+                                                                   data-parsley-maxlength="250"
+                                                                   data-parsley-maxlength-message="انستجرام يجب ان لا يزيد عن 250 حرف"
+                                                                   type="text"
+                                                                   data-parsley-pattern="https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                                                                   data-parsley-pattern-message="ادخل الرابط بشكل صحيح">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="snapShow">
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="ionicons ion-social-snapchat"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-input">
+                                                            <input id="txtSnapChat" type="text" placeholder="اسناب شات"
+                                                                   data-parsley-maxlength="250"
+                                                                   data-parsley-maxlength-message="اسناب شات يجب ان لا يزيد عن 250 حرف">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <p><a id="btnAddAdvertisement" href="#" class="button button-round blue ">إضافة</a></p>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <!-- contact Popup -->
+    <div class="popup popup-contact">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>تواصل معنا</span></h2>
+        </div>
+        <div id="contact-us-wrapper">
+
+        </div>
+    </div>
+
+    <!-- diamond Popup -->
+    <div id="diamond" class="popup popup-diamond">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span id="packageArabicName"></span></h2>
+        </div>
+        <h3><span id="categoryPrice"></span> <span id="categoryDuration">(سنة)</span> <span class="special"><b></b></span></h3>
+
+        <div id="categoryFeatures" class="content">
+            <p>إعلان بنر رئيسى (سنة)</p>
+
+        </div>
+
+
+        <a href="#addProjectDetails" class="button button-round blue close-popup">حجز</a>
+
+    </div>
+
+    <!-- gold Popup -->
+    <div class="popup popup-gold">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>الإعلان الذهبى</span></h2>
+        </div>
+        <h3>850 ريال فقط  <span>(6اشهر)</span> <span class="gold"><b>عرض خاص</b></span></h3>
+
+        <div class="content">
+            <p>إعلان بنر رئيسى (6 أشهر)</p>-
+            <p>إعلان بنر بين الأقسام (6 أشهر)</p>
+            <p>الخريطة</p>
+            <p>تعديل على الإعلان (سنة)</p>
+            <p>إرفاق إلى 20 صورة</p>
+            <p>ظهور الإعلان فى أعلى القسم</p>
+            <p>إشعارات عن الإعلان 12 إشعار لمدة سنة</p>
+        </div>
+        <a href="#advertismentDetails" class="button button-round blue close-popup">حجز</a>
+
+    </div>
+
+    <!-- silver Popup -->
+    <div class="popup popup-silver">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>الإعلان الفضى</span></h2>
+        </div>
+        <h3>500 ريال فقط  <span>(شهر)</span> <span class="silver"><b>عرض خاص</b></span></h3>
+
+        <div class="content">
+            <p>إعلان بنر بين الأقسام (شهر)</p>
+            <p>الخريطة</p>
+            <p>تعديل على الإعلان (شهر)</p>
+            <p>إرفاق إلى 10 صور</p>
+            <p>ظهور الإعلان فى أعلى القسم</p>
+            <p>إشعارات عن الإعلان 3 إشعار لمدة 6 أشهر</p>
+        </div>
+        <a href="#advertismentDetails" class="button button-round blue close-popup">حجز</a>
+
+    </div>
+
+    <!-- free Popup -->
+    <div class="popup popup-free">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>الإعلان المجانى</span></h2>
+        </div>
+        <h3>مجاناً</h3>
+
+        <div class="content">
+            <p>الخريطة</p>
+            <p>إرفاق 2 صورة</p>
+        </div>
+        <a href="#advertismentDetails" class="button button-round blue close-popup">حجز</a>
+
+    </div>
+
+    <!-- advertismentDetailsEdit Popup -->
+    <div class="popup popup-advertismentDetailsEdit">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>تعديل مشروع</span></h2>
+        </div>
+        <div class="list-block">
+            <form id="advertismentDetailsEdit" data-parsley-validate="">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-cube"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txtEditPersonalAdName"
+                                           type="text"
+                                           placeholder="اسم المشروع"
+                                           required
+                                           data-parsley-required-message="يجب ادخال اسم المشروع"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="اسم المشروع يجب ان لا يزيد عن 250 حرف">
+                                    <input id="personalUserAdId" type="hidden">
+                                    <input id="personalUserCategoryId" type="hidden">
+                                    <input id="personalUserPackageId" type="hidden">
+                                    <input id="personalUserLocationLatitude" type="hidden">
+                                    <input id="personalUserLocationLongtitude" type="hidden">
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-ios-home"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txtEditPersonalAdCity" type="text"
+                                           placeholder="المدينة" required
+                                           data-parsley-required-message="يجب ادخال المدينة"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="اسم المدينة يجب ان لا يزيد عن 250 حرف">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-document-text"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <textarea id="txtEditPersonalAdDescription" type="text" placeholder="معلومات عن المشروع" required
+                                              data-parsley-required-message="يجب ادخال تفاصيل  المشروع"
+                                              data-parsley-maxlength="1000"
+                                              data-parsley-maxlength-message="معلومات عن المشروع يجب ان لا تزيد عن 1000 حرف"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_content">
+                            <img id="edit-personal-project-main-image" class="">
+                        </div>
+
+                        <p>
+                            <a href="#!" class="button button-round light_green" id="edit-personal-project-main-image-button">تعديل الصورة الاساسية</a>
+                            <i class="hint"> يرجى اختيار صورة بالابعاد التالية 350 * 125  </i>
+                        </p>
+
+                    </li>
+                    <li>
+                        <div id="edit-personal-advertisement" class="row">
+                        </div>
+                        <p><a id="addUserPersonalAdvertisementPicture" href="#!" class="button button-round light_green">إضافة صورة</a></p>
+                    </li>
+
+                    <li>
+                        <div id="edit-advertisement-details-map-wrapper">
+
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-android-time"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id=txtEditPersonalAdWorkingHours type="text" placeholder="أوقات الدوام">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>وسائل التواصل</li>
+                    <li id="user-project-details-mobile-show">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-android-phone-portrait"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="user-project-details-mobile"
+                                           type="tel"
+                                           placeholder="رقم الجوال"
+                                           data-parsley-required-message="يجب ادخال رقم الجوال"
+                                           data-parsley-type="number"
+                                           data-parsley-length="[10, 10]"
+                                           data-parsley-length-message="رقم الجوال يجب أن يكون عشرة أرقام فقط"
+                                           data-parsley-type-message="أدخل رقم الجوال بطريقة صحيحة">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="user-project-details-email-show">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="user-project-details-email" type="email" placeholder="البريد الإلكترونى"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="البريد الإلكترونى يجب ان لا يزيد عن 250 حرف">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="user-project-details-website-show">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-android-globe"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="user-project-details-website" type="text" placeholder="الموقع الإلكترونى"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="الموقع الإلكترونى يجب ان لا يزيد عن 250 حرف"
+                                           data-parsley-pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                                           data-parsley-pattern-message="ادخل الرابط بشكل صحيح">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="user-project-details-twitter-show">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-social-twitter"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="user-project-details-twitter" type="text" placeholder="تويتر"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="تويتر يجب ان لا يزيد عن 250 حرف"
+                                           data-parsley-pattern="https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                                           data-parsley-pattern-message="ادخل الرابط بشكل صحيح">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="user-project-details-facebook-show">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-social-facebook"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="user-project-details-facebook" type="text" placeholder="فيسبوك"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="فيسبوك يجب ان لا يزيد عن 250 حرف"
+                                           data-parsley-pattern="https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                                           data-parsley-pattern-message="ادخل الرابط بشكل صحيح">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="user-project-details-instgram-show">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-social-instagram"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="user-project-details-instgram" type="text" placeholder="انستجرام"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="انستجرام يجب ان لا يزيد عن 250 حرف"
+                                           data-parsley-pattern="https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                                           data-parsley-pattern-message="ادخل الرابط بشكل صحيح">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="user-project-details-snap-show">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-social-snapchat"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="user-project-details-snap" type="text" placeholder="اسناب شات"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="اسناب شات يجب ان لا يزيد عن 250 حرف">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </form>
+            <p><a id="btnEditUserPersonaAd" href="#" class="button button-round blue ">تعديل</a></p>
+
+        </div>
+
+    </div>
+    <!-- touristDetailsEdit Popup -->
+    <div class="popup popup-touristDetailsEdit">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>تعديل زيارة</span></h2>
+        </div>
+        <div class="list-block">
+            <form class="list-block" id="userTouristVisitEdit" data-parsley-validate="">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-cube"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txtEditPersonalTouristName" type="text" placeholder="اسم الزيارة"
+                                           required
+                                           data-parsley-required-message="يجب ادخال اسم الزيارة"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="اسم الزيارة يجب ان لا يزيد عن 250 حرف">
+                                    <input id="personalUserTouristId" type="hidden">
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ion-clock"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txtEditPersonalVisitDate" onfocus="(this.type='date')" type="text" placeholder="تاريخ الزيارة" required
+                                           data-parsley-required-message="يجب ادخال تاريخ الزيارة">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-ios-home"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txtEditPersonalTouristCity" type="text" placeholder="المدينة"
+                                           required
+                                           data-parsley-required-message="يجب ادخال المدينة"
+                                           data-parsley-maxlength="250"
+                                           data-parsley-maxlength-message="اسم المدينة يجب ان لا يزيد عن 250 حرف">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-document-text"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <textarea id="txtEditPersonalTouristDescription" type="text"
+                                              placeholder="معلومات عن الزيارة " required
+                                              data-parsley-required-message="يجب ادخال معلومات عن الزيارة"
+                                              data-parsley-maxlength="250"
+                                              data-parsley-maxlength-message="معلومات عن الزيارة يجب ان لا يزيد عن 1000 حرف"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_content">
+                            <img id="edit-tourist-visit-main-image" src="img/profile.jpg" class="">
+                        </div>
+
+                        <p>
+                            <a href="#!" class="button button-round light_green" id="edit-tourist-visit-main-image-button">تعديل الصورة الاساسية</a>
+                        </p>
+
+                    </li>
+
+                    <li>
+                        <div id="add-personal-tourist-images" class="row">
+
+                        </div>
+
+                        <p><a id="addUserPersonalTouristPicture" href="#!" class="button button-round light_green">إضافة صورة</a></p>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-location"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txt-personal-edit-tourist-details-video-link" type="text" placeholder="لينك الفيديو">
+                                </div>
+                            </div>
+                        </div>
+                        <p><a id="personal-edit-tourist-details-multiple-videos" href="#!" class="button button-round light_green">إضافة فيديو</a></p>
+                        <div class="row" id="edit-tourist-details-multiple-videos-wrapper"></div>
+                    </li>
+
+                    <li>
+                        <div id="edit-tourist-details-map-wrapper">
+
+                        </div>
+                    </li>
+
+                </ul>
+            </form>
+            <p><a id="btnEditUserPersonalTourist" href="#" class="button button-round blue ">تعديل</a></p>
+
+        </div>
+
+    </div>
+
+    <!-- addTourist Popup -->
+    <div class="popup popup-addTourist">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>إضافة مكان سياحى</span></h2>
+        </div>
+
+        <form id="add-tourist-details" data-parsley-validate="" class="list-block">
+            <div class="item-content">
+                <div class="item-media"><i class="ionicons ion-document-text"></i></div>
+                <div class="item-inner">
+                    <div class="item-input">
+                        <input id="txtTouristDetailsLocationName"
+                               type="text"
+                               placeholder="اسم الموقع السياحى"
+                               required
+                               data-parsley-required-message="يجب ادخال اسم الموقع السياحى"
+                               data-parsley-maxlength="250"
+                               data-parsley-maxlength-message="اسم الموقع يجب ان لا يزيد عن 250 حرف">
+                    </div>
+                </div>
+            </div>
+            <div class="item-content">
+                <div class="item-media"><i class="ionicons ion-ios-home"></i></div>
+                <div class="item-inner">
+                    <div class="item-input">
+                        <input id="txtTouristDetailsCity" type="text" placeholder="المدينة" required
+                               data-parsley-required-message="يجب ادخال المدينة"
+                               data-parsley-maxlength="250"
+                               data-parsley-maxlength-message="المدينة يجب ان لا تزيد عن 250 حرف" />
+                    </div>
+                </div>
+            </div>
+            <div class="item-content">
+                <div class="item-media"><i class="ionicons ion-android-calendar"></i></div>
+                <div class="item-inner">
+                    <div class="item-input">
+                        <input type="date" id="dtpTouristDetailsDate" placeholder="تاريخ الزيارة" required
+                               data-parsley-required-message="يجب ادخال الزيارة" />
+                    </div>
+                </div>
+            </div>
+            <div class="item-content">
+                <div class="item-media"><i class="ionicons ion-document-text"></i></div>
+                <div class="item-inner">
+                    <div class="item-input">
+                        <textarea id="txtAreaLocationInformation" type="text" placeholder="معلومات عن الموقع السياحى" required
+                                  data-parsley-required-message="يجب ادخال الموقع السياحى"
+                                  data-parsley-maxlength="1000"
+                                  data-parsley-maxlength-message="معلومات عن الموقع السياحى يجب ان لا تزيد عن 1000 حرف"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="img_content">
+                <img id="imgMainVisit" src="img/profile.jpg" />
+            </div>
+            <p><a href="#!" class="button button-round light_green" id="add-tourist-details-image">إضافة صورة أساسية للزيارة</a></p>
+            <div class="row" id="add-tourist-details-multiple-images-wrapper">
+
+            </div>
+            <p><a id="add-tourist-details-multiple-images" href="#!" class="button button-round light_green">إضافة صورة</a></p>
+            <div class="row" id="add-tourist-details-multiple-videos-wrapper">
+
+            </div>
+            <div class="item-content">
+                <div class="item-media"><i class="ionicons ion-location"></i></div>
+                <div class="item-inner">
+                    <div class="item-input">
+                        <input id="txt-tourist-details-video-link" type="text" placeholder="لينك الفيديو">
+                    </div>
+                </div>
+            </div>
+            <p><a id="add-tourist-details-multiple-videos" href="#!" class="button button-round light_green">إضافة فيديو</a></p>
+            <div id="add-tourist-details-map-wrapper">
+
+            </div>
+            <!--<p><input id="btn-add-tourist-details" type="submit" class="button button-round blue" value="إضافة" /></p>-->
+            <p><a id="btn-add-tourist-details" class="button button-round blue">إضافة</a></p>
+        </form>
+    </div>
+
+    <!-- profileDetailsEdit Popup -->
+    <div class="popup popup-profileDetailsEdit">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>تعديل البيانات</span></h2>
+        </div>
+        <div class="list-block">
+            <form class="list-block" id="userProfileEdit" data-parsley-validate="">
+                <ul>
+                    <li>
+                        <div class="img_content">
+                            <div class="overlay">
+                                <i class="ionicons ion-android-add-circle"></i>
+                            </div>
+                            <img id="profileUserImage" onerror="replaceURL(this,'inner')" />
+                        </div>
+                        <p><a id="btnAddProfilePic" href="#!" class="button button-round light_green">تعديل صورة</a></p>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-person"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txtUserProfileName" type="text" placeholder="الاسم الثلاثي " required
+                                           data-parsley-required-message="يجب ادخال الاسم الثلاثي">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txtUserProfileEmail" type="email" placeholder="البريد الإلكترونى"
+                                           required=""
+                                           data-parsley-required-message="يجب ادخال البريد الإلكترونى"
+                                           data-parsley-type="email"
+                                           data-parsley-type-message="أدخل البريد الإلكتروني بطريقة صحيحة">
+                                </div>
+                            </div>
+                        </div>
+                    </li>-->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-android-phone-portrait"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input id="txtUserMobileNumber"
+                                           required
+                                           type="tel"
+                                           placeholder="رقم الجوال"
+                                           data-parsley-required-message="يجب ادخال رقم الجوال"
+                                           data-parsley-type="number"
+                                           data-parsley-length="[10, 10]"
+                                           data-parsley-length-message="رقم الجوال يجب أن يكون عشرة أرقام فقط"
+                                           data-parsley-type-message="أدخل رقم الجوال بطريقة صحيحة">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+            <p><a id="btnEditUserDetails" href="#" class="button button-round blue ">تعديل</a></p>
+        </div>
+    </div>
+
+    <!-- editProjectOwnerProfile Popup -->
+    <div class="popup popup-editProjectOwnerProfile">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>تعديل البيانات</span></h2>
+        </div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="ionicons ion-person"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="الاسم">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="email" placeholder="البريد الإلكترونى">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="password" placeholder="كلمة المرور">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="password" placeholder="تأكيد كلمة المرور">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+            <p><a href="#" class="button button-round blue close-popup">تعديل</a></p>
+
+        </div>
+    </div>
+
+
+    <!-- thanks Popup -->
+    <div class="popup popup-thanks">
+        <div class="row allTitle">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>صفحة الدفع</span></h2>
+        </div>
+        <!--<div class="row freeTitle">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>صفحة الإعلان المجانى</span></h2>
+        </div>-->
+        <div class="thanksForAllPopups">
+            <p>نشكر لكم تسجيل إعلانكم فى تطبيق جازان ونفيدكم بأنه تم إرسال إعلانكم وجارى الموافقة عليه بعد تسديد رسوم الإعلان لتحويل الرسوم</p>
+            <p>الرجاء تحويل الرسوم على البيانات التالية :</p>
+            <img src="img/bank.png" style="width: 150px;" />
+            <p><b>اسم صاحب الحساب : </b>عادل بن حسين جريبى</p>
+            <p><b>رقم حساب بنك الراجحى : </b>225608010277571</p>
+            <p><b>رقم الآيبان : </b>SA5480000225608010277571</p>
+            <p class="phone-number" onclick="window.open('whatsapp://send?=&phone=+9660566678810', '_system');"><i class="ionicons ion-social-whatsapp"></i> <b>التواصل واتس اب : </b>0566678810</p>
+        </div>
+        <div class="thanksForFreePopup">
+            <p>نشكر لكم تسجيل اعلانكم في تطبيق جازان ونفيدكم بأنه تم ارسال إعلانكم وجاري الموافقة عليه.</p>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyj9oMdWxHxLb1C11EQtOj4WIbha861P4&libraries=places,geometry" async defer></script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC63O7eJ5LlJZlQDlmAqZOKXz2fn7FsLU&libraries=places,geometry" async defer></script>
+    <script src="scripts/GoogleMapApiHelper.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="js/parsley.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="js/owl.carousel.js"></script>
+
+    <script src="js/framework7.min.js"></script>
+
+    <script src="services/appSettingService.js"></script>
+    <script src="services/appStartService.js"></script>
+    <script src="services/notificationService.js"></script>
+    <script src="services/authenticationService.js"></script>
+
+    <script src="scripts/FValidation.js"></script>
+    <script src="scripts/CallService.js"></script>
+    <script src="js/googlePlus.js"></script>
+
+    <script src="scripts/SideMainWork1.js"></script>
+    <script src="scripts/SideMainWork2.js"></script>
+    <script type="text/javascript" src="js/jquery.rateyo.js"></script>
+    <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+
+    <script src="controller/personalPageController.js"></script>
+    <script src="controller/personalPageProjectsController.js"></script>
+    <script src="controller/personalPageProjectDetailsController.js"></script>
+    <script src="controller/personalPageTouristVisitsController.js"></script>
+    <script src="controller/personalPageTouristVisitDetailsController.js"></script>
+    <script src="controller/notificationController.js"></script>
+    <script src="controller/mobileSettingController.js"></script>
+    <script src="controller/newsController.js"></script>
+    <script src="controller/advertismentController.js"></script>
+    <script src="controller/quizPageController.js"></script>
+
+    <script src="scripts/MainWork.js"></script>
+
+    <script src="scripts/localStorageService.js"></script>
+    <script src="scripts/dataContextService.js"></script>
+
+
+</body>
+
+</html>

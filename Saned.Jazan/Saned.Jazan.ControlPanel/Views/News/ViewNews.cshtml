@@ -1,0 +1,210 @@
+﻿@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+@model PagedList.IPagedList<Saned.Jazan.Data.Core.Models.News>
+@{
+    var counter =1 ;
+    ViewBag.Title = "الاخبار";
+    var photo = new Saned.Jazan.Data.Core.Models.NewsImage();
+}
+<div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+
+            <small>تفاصيل الاخبار</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a onclick="showPageLoadingSpinner()" href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i>الرئيسية</a></li>
+            <li class="active">الاخبار</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="row">
+                        <div class="box-header">
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title">
+                                    عرض بيانات الاخبار
+                                </h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title pull-right">
+                                    <a onclick="showPageLoadingSpinner()" href="@Url.Action("AddNews", "News")" type="button" class="btn btn-success">إضافة</a>
+
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive">
+                        <table id="example1" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                @*<th>المسلسل</th>*@
+                                <th>عنوان الخبر</th>
+                                <th>صورة الخبر</th>
+                                <th>الإعدادات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach (var news in Model)
+                            {
+                                <tr>
+                                    @*<td></td>*@
+                                    @*<td>@(counter++)</td>*@
+                                    <td>@news.Title</td>
+
+
+                                    <td>
+
+
+                                        @{photo = news.NewsImages.FirstOrDefault();}
+                                        @if (@photo != null)
+                                        {
+
+                                            if (!string.IsNullOrEmpty(photo.ImagePath))
+                                            {
+                                                <a href="@photo.ImagePath" rel="prettyPhoto[pp_gal]">
+                                                    <img src="@photo.ImagePath.Replace("uploads", "uploads/Thumbnails")" onerror="this.onerror = null; this.src = '/Content/dist/img/noimagedefault.jpg'" width="100"/>
+
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@photo.ImagePath">
+                                                    <img src="/Content/dist/img/noimagedefault.jpg"  width="100"/>
+                                                </a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a href="#">
+                                                <img src="/Content/dist/img/noimagedefault.jpg" width="100"/>
+                                            </a>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                                            "DeleteNews", "News",
+                                            new { Id = news.Id, Page = ViewBag.Page, keyword = ViewBag.keyword},
+                                            new AjaxOptions
+                                            {
+                                                Confirm = "هل انت متأكد انك تريد حذف الخبر ؟",
+                                                UpdateTargetId = "searchResult",
+                                                InsertionMode = InsertionMode.Replace,
+                                                HttpMethod = "POST",
+                                                LoadingElementId = "ajaxLoaderDiv",
+                                                OnSuccess = "onsuccessDeletion()",
+                                                OnFailure = "onFailureDeletion()"
+                                            },
+                                            new { @class = "btn btn-danger" })
+                                        <a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("Edit", "News", new {id = news.Id}))" class="btn btn-success"><i title="تعديل" class="fa fa-edit"></i></a>
+                                        <button title="حذف" class="btn btn-danger js-delete-product" data-product-id="@news.Id" data-toggle="modal" data-target="#Delete"><i title="حذف" class="fa fa-trash"></i></button>
+
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager(Model,
+                            page => Url.Action("Search", new { page = page, keyword = ViewBag.keyword}),
+                            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv" }))
+
+
+                     
+                    </div>
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+    
+
+<script>
+    function onsuccessDeletion(data) {
+
+        NotificationService.displaySuccess("تم الحذف بنجاح");
+    }
+    function onFailureDeletion(data) {
+
+        NotificationService.displayError("حدث خطأ أثناء الحذف .");
+    }
+</script>
+@section scripts{
+    @*<script>
+        $(document).ready(function () {
+
+
+            $(".js-delete-product").click(function (e) {
+                var button = $(this); //$(e.target);
+                var selectedId = button.attr("data-product-id");
+                $(".js-delete-yes").click(function () {
+                    $.ajax({
+                        url: '/News/DeleteNews',
+                        type: "POST",
+                        data: { id: selectedId },
+                        success: function (data) {
+                            if (data.message === "Deleted") {
+                                button.parents("tr").fadeOut(function () {
+                                    $(this).remove();
+                                    $("a[rel='prettyPhoto[pp_gal]']").prettyPhoto({
+                                        show_title: false,
+                                        social_tools: false,
+                                        deeplinking: false,
+                                    });
+                                });
+                                $("#Delete").modal('toggle');
+                                //toastr["success"]("ااا")
+                                NotificationService.displaySuccess("تم الحذف بنجاح");
+                            } else {
+                                $("#Delete").modal('toggle');
+                                NotificationService.displayError("هذا الخبر لا يمكن حذفه");
+                            }
+                        }
+                    });
+                });
+
+            });
+            $(".js-archive-product").click(function (e) {
+                var button = $(this); //$(e.target);
+                var selectedId = button.attr("data-product-id");
+                //$(".js-delete-yes").click(function () {
+                $.ajax({
+                    url: '/News/Archive',
+                    type: "POST",
+                    data: { id: selectedId },
+                    success: function (data) {
+                        if (data.message === "Archive") {
+                            button.title = "إلغاء الارشفة";
+                            button.parents("tr").fadeOut(function () {
+                                $(this).remove();
+                            });
+                            $("#Archive").modal('toggle');
+                            //toastr["success"]("ااا")
+                            NotificationService.displaySuccess("تم الارشيف بنجاح");
+                        } else {
+                            $("#Archive").modal('toggle');
+                            NotificationService.displayError("هذا الخبر لا يمكن ارشفته");
+                        }
+                    }
+                });
+                //});
+
+            });
+        });
+    </script>*@
+}
+
+

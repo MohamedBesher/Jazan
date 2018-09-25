@@ -1,0 +1,203 @@
+﻿
+
+@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+@model PagedList.IPagedList<Saned.Jazan.Data.Core.Models.TouristVisit>
+
+<div class="box-body">
+    @if (Model.Count > 0)
+    {
+
+        <label class="col-xs-12">عدد الزيارات :  @ViewBag.ResultCount </label>
+
+
+
+        <div class="box-body table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>م</th>
+                        <th>صورة الزيارة</th>
+                        <th>عنوان الزيارة</th>
+                        @*<th>تفاصيل الزيارة</th>*@
+                        <th> المدينة</th>
+                        <th>تاريخ الزيارة</th>
+                        <th>الإعدادات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int counter = 0;}
+                    @foreach (var touristVisit in Model)
+                    {
+                        counter++;
+                        <tr>
+                            <td>@counter</td>
+                            <td>
+
+
+                                @if (!string.IsNullOrEmpty(touristVisit.ImageUrl))
+                                {
+                                    <a href="@(ViewBag.FrontEndUrl + "" + touristVisit.ImageUrl)" rel="prettyPhoto[pp_gal]">
+                                        <img src="@(ViewBag.FrontEndUrl + "" + touristVisit.ImageUrl)" onerror="this.onerror = null;this.src = '/Content/dist/img/noimagedefault.jpg'" class="img-circle" width="50" height="50" />
+
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@touristVisit.ImageUrl">
+                                        <img src="/Content/dist/img/noimagedefault.jpg" class="img-circle" width="50" height="50" />
+                                    </a>
+                                }
+                            </td>
+                            <td>@touristVisit.Name</td>
+                            @*<td style="word-wrap: break-word">@touristVisit.Description</td>*@
+                            <td>@touristVisit.CityName</td>
+                            <td>@touristVisit.VisitDate</td>
+                            <td>
+
+                                @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                   "DeleteTouristVisit", "Users",
+                   new { Id = touristVisit.Id, Page = ViewBag.Page, keyword = ViewBag.keyword, UserId = ViewBag.UserId },
+                   new AjaxOptions
+                   {
+                       Confirm = "هل تريد حذف هذه الزيارة ؟",
+                       UpdateTargetId = "UserTouristVisits",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "POST",
+                       LoadingElementId = "ajaxLoaderDiv",
+                       OnSuccess = "onsuccessUserTouristVisitsDeletion()",
+                       OnFailure = "onFailureUserTouristVisitsDeletion()"
+                   },
+                   new { @class = "btn btn-danger" })
+
+                                @{
+                                    if (touristVisit.IsApproved)
+                                    {
+                                        @Ajax.RawActionLink(string.Format("<i title='الغاء الموافقة' class='glyphicon glyphicon-remove'></i>"),
+                  "UnApprove", "TouristVisit",
+                  new { Id = touristVisit.Id },
+                  new AjaxOptions
+                  {
+                      HttpMethod = "POST",
+                      OnSuccess = "onsuccessTouristVisitsUnApprove($(this),data)",
+                      OnFailure = "onFailureTouristVisitsUnApprove()"
+                  },
+                  new { @class = "btn btn-danger" });
+                                        @*<button title="الغاء الموافقة" class="btn btn-danger js-UnApprove-product" data-product-id="@advertisement.Id" data-toggle="modal" data-target="#UnApproved"><i title="الغاءالموافقة" class="glyphicon glyphicon-remove"></i></button>*@
+                                    }
+                                    else
+                                    {
+                                        @Ajax.RawActionLink(string.Format("<i title='الموافقة' class='glyphicon glyphicon-ok'></i>"),
+                 "Approve", "TouristVisit",
+                 new { Id = touristVisit.Id },
+                 new AjaxOptions
+                 {
+                     HttpMethod = "POST",
+                     OnSuccess = "onsuccessTouristVisitsApprove($(this),data)",
+                     OnFailure = "onFailureTouristVisitsApprove()"
+                 },
+                 new { @class = "btn btn-success" });
+                                        @*<button title="الموافقة" class="btn btn-danger js-Approve-product" data-product-id="@advertisement.Id" data-toggle="modal" data-target="#Approved"><i title="الموافقة" class="glyphicon glyphicon-ok"></i></button>*@
+                                    }
+                                }
+                                <a title="تفاصيل" href="@(Url.Action("Details", "TouristVisit", new {id = touristVisit.Id}))" class="btn btn-primary"><i title="تفاصيل" class="glyphicon glyphicon-list-alt"></i></a>
+
+                            </td>
+
+
+                        </tr>
+                                    }
+                </tbody>
+            </table>
+
+
+            @Html.PagedListPager(Model,
+        page => Url.Action("SearchTouristVisits", new { page = page, keyword = ViewBag.keyword, UserId = ViewBag.UserId }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "UserTouristVisits", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv", OnSuccess = "pagingSuccess" }))
+
+        </div>
+
+
+
+        <script>
+            function onsuccessUserTouristVisitsDeletion(data) {
+
+                NotificationService.displaySuccess("تم الحذف بنجاح");
+                initPrettyPhoto();
+            }
+            function onFailureUserTouristVisitsDeletion(data) {
+
+                NotificationService.displayError("حدث خطأ أثناء الحذف .");
+            }
+
+            function onsuccessTouristVisitsApprove(btn, data) {
+                if (data.message === "Approved") {
+                    btn.html("<i title='الغاء الموافقة' class='glyphicon glyphicon-remove'></i>");
+                    var fail = btn.attr('data-ajax-failure').replace('Approve', 'UnApprove');
+                    var success = btn.attr('data-ajax-success').replace('Approve', 'UnApprove');
+                    btn.attr('data-ajax-failure', fail);
+                    btn.attr('data-ajax-success', success);
+
+                    var path = btn.attr('href').replace('Approve', 'UnApprove');
+                    btn.attr('href', path);
+
+
+                    btn.removeClass('btn-success');
+                    btn.addClass('btn-danger');
+                    NotificationService.displaySuccess("تم الموافقة بنجاح");
+                }
+                else if (data.message === "NotFound") {
+                    NotificationService.displayError("هذا الأعلان غير موجود .");
+                }
+                else
+                    NotificationService.displayError("حدث خطأ أثناء الموافقة .");
+
+
+            }
+            function onFailureTouristVisitsApprove() {
+                NotificationService.displayError("حدث خطأ أثناء الموافقة .");
+
+            }
+            function onsuccessTouristVisitsUnApprove(btn, data) {
+                if (data.message === "UnApproved") {
+                    btn.html("<i title='الموافقة' class='glyphicon glyphicon-ok'></i>");
+                    var path = btn.attr('href').replace('UnApprove', 'Approve');
+                    btn.attr('href', path);
+                    var fail = btn.attr('data-ajax-failure').replace('UnApprove', 'Approve');
+                    var success = btn.attr('data-ajax-success').replace('UnApprove', 'Approve');
+                    btn.attr('data-ajax-failure', fail);
+                    btn.attr('data-ajax-success', success);
+
+                    btn.removeClass('btn-danger');
+                    btn.addClass('btn-success');
+                    NotificationService.displaySuccess("تم الغاء الموافقة بنجاح");
+                }
+                else if (data.message === "NotFound")
+                    NotificationService.displayError("هذا الأعلان غير موجود .");
+                else
+                    NotificationService.displayError("حدث خطأ أثناء الغاء الموافقة .");
+            }
+            function onFailureTouristVisitsUnApprove(btn) {
+                NotificationService.displayError("حدث خطأ أثناء الغاء الموافقة .");
+
+            }
+
+        </script>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="box box-solid">
+                                            <div class="alert ">
+                                                <strong> لا يوجد زيارات  .</strong>
+                                            </div>
+
+
+                                        </div>
+
+                                    }
+</div>
+
+
+
+

@@ -1,0 +1,184 @@
+﻿@model Saned.Jazan.Data.Core.Models.Package
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions options = new AjaxOptions
+    {
+        OnSuccess = "OnSuccess_SavePackage()",
+        OnFailure = "onFailure_SavePackage()",     
+    };
+}
+
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <h1>
+            <small> تفاصيل الباقة</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-dashboard"></i>الرئيسية
+                </a>
+            </li>
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Package")">
+                    <i class="fa fa-gift"></i>الباقات
+                </a>
+            </li>
+            <li class="active">تفاصيل الباقة</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="row">
+                        <div class="box-header">
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title">
+                                    عرض تفاصيل الباقة
+                                </h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <h3 class="box-title pull-right"></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div>
+                        <div id="Ads-Details">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+
+                                    <div class="col-xs-6">
+                                        
+                                        <div class="box-body">
+                                            @using (Ajax.BeginForm("Edit", options))
+                                            {
+                                                <div class="form-group">
+                                                    @Html.HiddenFor(model => model.Id)
+                                                    @Html.LabelFor(model => model.ArabicName)
+                                                    <span class="required">*</span>
+
+                                                    @Html.TextBoxFor(model => model.ArabicName, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.ArabicName, null, new { @class = "danger" })
+      
+
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.Period)
+                                                    <span class="required">*</span>
+
+                                                    @Html.TextBoxFor(model => model.Period, new { type = "number", @class = "form-control" }) 
+
+                                                    @Html.ValidationMessageFor(model => model.Period, null, new { @class = "danger" })
+
+
+
+                                                    </div>
+                                               
+                                                <div class="form-group">
+                                                    
+                                                    @Html.LabelFor(model => model.Price)
+                                                    <span class="required">*</span>
+
+                                                    @Html.TextBoxFor(model => model.Price, new { type = "number", @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Price, null, new { @class = "danger" })
+
+
+
+
+
+                                                </div>
+                                                   
+
+                                                    <button type="submit" class="btn btn-success pull-right"><i class="glyphicon glyphicon-floppy-disk"></i>حفظ</button>
+
+                                                    }
+                                                </div>
+
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h4>مميزات الباقة </h4>
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>اسم الميزة </th>
+                                                <th>المدة بالايام</th>
+                                                <th>العدد</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach (var packageFeature in Model.PackageFeatures)
+                                            {                                                   
+                                                <tr>
+                                                    <td> @packageFeature.Feature.ArabicName</td>
+                                                    
+                                                    
+                                                    
+                                                    <td> @(packageFeature.Period.ToString() != "" ? packageFeature.Period.ToString() : "غير متاح")</td>
+
+                                                    <td> @(packageFeature.Quantity.ToString() != "" ? packageFeature.Quantity.ToString() : "غير متاح")</td>
+
+
+
+                                                </tr>
+                                            }
+                                            </tbody>
+                                        </table>
+
+
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div><!-- /.box-header -->
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+<script >
+    
+
+    function OnSuccess_SavePackage(data) {
+
+        NotificationService.displaySuccess("تم التعديل بنجاح");
+        window.location.href = "/Package";
+    }
+    function onFailure_SavePackage(data) {
+
+        NotificationService.displayError("حدث خطأ أثناء التعديل .");
+    }
+
+    function ValidateForm() {
+      
+        return $.validator.unobtrusive.parse($('form'));
+    }
+</script>

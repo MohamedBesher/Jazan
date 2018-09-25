@@ -1,0 +1,65 @@
+﻿@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+@model PagedList.IPagedList<Saned.Jazan.Data.Core.Dtos.CategoryView>
+
+
+<div class="box-body table-responsive">
+    <table id="dtCategoties" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                @*<th>المسلسل</th>*@
+                <th>اسم التصنيف</th>
+                <th>تحت تصنيف</th>
+                <th>صورة التصنيف</th>
+                <th>الإعدادات</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var bo in Model)
+            {
+                <tr>
+                    @*<td></td>*@
+                    @*<td>@(counter++)</td>*@
+                    <td>@bo.CategoryNameAr</td>
+                    <td>@bo.ParentName</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(@bo.CategoryImage))
+                        {
+                            <a href="@bo.CategoryImage" rel="prettyPhoto[pp_gal]">
+                                <img src="@bo.CategoryImage.Replace("uploads", "uploads/Thumbnails")" onerror="this.onerror = null; this.src = '/Content/dist/img/noimagedefault.jpg'" width="100" />
+
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@bo.CategoryImage">
+                                <img src="/Content/dist/img/noimagedefault.jpg" width="100" />
+                            </a>
+                        }
+                    </td>
+
+                    <td>
+                        @if (@bo.ParentId == null)
+                        {
+                            <a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("Edit", "Category", new {id = bo.CategoryId}))" class="btn btn-success"><i title="تعديل" class="fa fa-edit"></i></a>
+                        }
+                        else
+                        {
+                            <a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("EditSubCategory", "Category", new {id = bo.CategoryId}))" class="btn btn-success"><i title="تعديل" class="fa fa-edit"></i></a>
+                        }
+                        <button title="حذف" class="btn btn-danger js-delete-product" data-product-id="@bo.CategoryId" data-toggle="modal" data-target="#Delete"><i title="حذف" class="fa fa-trash"></i></button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model,
+        page => Url.Action("Search", new { page = page, Id = ViewBag.CategoryId }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv" }))
+
+
+
+
+</div>

@@ -1,0 +1,232 @@
+﻿
+@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+@model List<Saned.Common.Comments.ComplexType.CommentComplex>   
+
+@functions {
+	private int _i;
+}
+
+@if (Model.Count > 0)
+{
+	<label class="col-xs-12">عدد التعليقات :  @Model[0].OverallCount </label>
+
+
+	<div>
+		@foreach (var comment in Model)
+		{
+
+			<div class="row">
+				<div class="col-sm-1">
+					<div class="thumbnail">
+						@if (!string.IsNullOrEmpty(comment.PhotoUrl))
+						{
+							<a href="@(ViewBag.FrontEndUrl + "" + comment.PhotoUrl)" rel="prettyPhoto[pp_gal]" class="img-circle" width="100" height="100">
+								<img src="@(ViewBag.FrontEndUrl + "" + comment.PhotoUrl)" onerror="this.onerror = null;this.src = '/Content/dist/img/noimagedefault.jpg'" class="img-responsive user-photo" />
+
+							</a>
+						}
+						else
+						{
+							<a href="/Content/dist/img/noimagedefault.jpg">
+								<img src="/Content/dist/img/noimagedefault.jpg" class="img-responsive user-photo" />
+							</a>
+						}
+
+					</div><!-- /thumbnail -->
+				</div><!-- /col-sm-1 -->
+				<div class="col-sm-11">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong>@comment.FullName</strong> <span class="text-muted">@comment.CreatedDate</span>
+							
+							@Ajax.RawActionLink(string.Format("<i class='fa fa-close hideBtn'></i>"),
+				   "DeleteComment", "TouristVisit",
+				   new { Id = comment.Id, Page = ViewBag.PageIndex, OverallCount = comment.OverallCount, RelatedId = ViewBag.RelatedId },
+				   new AjaxOptions
+				   {
+					   Confirm = "هل انت متأكد انك تريد حذف التعليق ؟",
+					   UpdateTargetId = "Ads-Comments",
+					   InsertionMode = InsertionMode.Replace,
+					   HttpMethod = "POST",
+					   LoadingElementId = "ajaxLoaderDiv",
+					   OnSuccess = "onsuccessDeletion()",
+					   OnFailure = "onFailureDeletComment()"
+				   },
+				   new { })
+						</div>
+						<div class="panel-body">
+							@comment.CommentText
+						</div><!-- /panel-body -->
+					</div><!-- /panel panel-default -->
+
+					@*@Html.Action("_GetCommentsByParentsId", new { parentId = comment.Id })*@
+
+
+				</div><!-- /col-sm-5 -->
+
+
+
+			</div><!-- /row -->
+		}
+	</div>
+	<div class="pagination-container">
+
+		<ul class="pagination">
+			@{_i = ((Model[0].OverallCount / ViewBag.PageSize) + 1);
+
+				if (ViewBag.PageIndex != 1)
+				{
+					<li>
+						@Ajax.RawActionLink("<span aria-hidden='true'>&laquo;</span>",
+							"_Comments", "TouristVisit",
+							new { PageIndex = (ViewBag.PageIndex - 1), RelatedId = ViewBag.RelatedId },
+							new AjaxOptions
+							{
+								HttpMethod = "GET",
+								UpdateTargetId = "Ads-Comments",
+								InsertionMode = InsertionMode.Replace,
+								LoadingElementId = "ajaxLoaderDiv",
+							},
+							new { aria_label = "Previous" })
+
+					</li>}
+			}
+			@for (var i = 1; i <= _i; i++)
+			{
+
+
+				if (i == ViewBag.PageIndex)
+				{
+					<li class="active">
+						@Ajax.RawActionLink(i.ToString(),
+							"_Comments", "TouristVisit",
+							new { PageIndex = i, RelatedId = ViewBag.RelatedId },
+							new AjaxOptions
+							{
+								HttpMethod = "GET",
+								UpdateTargetId = "Ads-Comments",
+								InsertionMode = InsertionMode.Replace,
+								LoadingElementId = "ajaxLoaderDiv",
+							},
+							new { })
+
+					</li>}
+				else
+				{
+					<li>
+						@Ajax.RawActionLink(i.ToString(),
+							"_Comments", "TouristVisit",
+							new { PageIndex = i, RelatedId = ViewBag.RelatedId },
+							new AjaxOptions
+							{
+								HttpMethod = "GET",
+								UpdateTargetId = "Ads-Comments",
+								InsertionMode = InsertionMode.Replace,
+								LoadingElementId = "ajaxLoaderDiv",
+							},
+							new { })
+
+					</li>}
+
+			}
+
+			@if (_i != ViewBag.PageIndex)
+			{
+				<li>
+					@Ajax.RawActionLink("<span aria-hidden='true'>&raquo;</span>",
+						"_Comments", "Advertisement",
+						new { PageIndex = (ViewBag.PageIndex + 1), RelatedId = ViewBag.RelatedId },
+						new AjaxOptions
+						{
+							HttpMethod = "GET",
+							UpdateTargetId = "Ads-Comments",
+							InsertionMode = InsertionMode.Replace,
+							LoadingElementId = "ajaxLoaderDiv",
+						},
+						new { aria_label = "Next" })
+
+				</li>}
+
+		</ul>
+	</div>
+
+	<script>
+		function onsuccessDeletion(data) {
+
+			NotificationService.displaySuccess("تم الحذف بنجاح");
+		}
+		function onFailureDeletComment(data) {
+
+			NotificationService.displayError("حدث خطأ أثناء الحذف .");
+		}
+		function onsuccessApprove(btn, data) {
+			if (data.message === "Approved") {
+				btn.html("<i title='الغاء الموافقة' class='glyphicon glyphicon-remove'></i>");
+				var fail = btn.attr('data-ajax-failure').replace('Approve', 'UnApprove');
+				var success = btn.attr('data-ajax-success').replace('Approve', 'UnApprove');
+				btn.attr('data-ajax-failure', fail);
+				btn.attr('data-ajax-success', success);
+
+				var path = btn.attr('href').replace('Approve', 'UnApprove');
+				btn.attr('href', path);
+
+
+				btn.removeClass('btn-success');
+				btn.addClass('btn-danger');
+				NotificationService.displaySuccess("تم الموافقة بنجاح");
+			}
+			else if (data.message === "NotFound"){
+				NotificationService.displayError("هذا الأعلان غير موجود .");
+			}
+			else
+				NotificationService.displayError("حدث خطأ أثناء الموافقة .");
+
+
+		}
+		function onFailureApprove() {
+			NotificationService.displayError("حدث خطأ أثناء الموافقة .");
+
+		}
+		function onsuccessUnApprove(btn, data) {
+			if (data.message === "UnApproved") {
+				btn.html("<i title='الموافقة' class='glyphicon glyphicon-ok'></i>");
+				var path = btn.attr('href').replace('UnApprove', 'Approve');
+				btn.attr('href', path);
+				var fail = btn.attr('data-ajax-failure').replace('UnApprove', 'Approve');
+				var success = btn.attr('data-ajax-success').replace('UnApprove', 'Approve');
+				btn.attr('data-ajax-failure', fail);
+				btn.attr('data-ajax-success', success);
+
+				btn.removeClass('btn-danger');
+				btn.addClass('btn-success');
+				NotificationService.displaySuccess("تم الغاء الموافقة بنجاح");
+			}
+			else if (data.message === "NotFound")
+				NotificationService.displayError("هذا الأعلان غير موجود .");
+			else
+				NotificationService.displayError("حدث خطأ أثناء الغاء الموافقة .");
+		}
+		function onFailureUnApprove(btn) {
+			NotificationService.displayError("حدث خطأ أثناء الغاء الموافقة .");
+
+		}
+
+
+	</script>
+				}
+
+				else
+				{
+					<div class="box box-solid">
+						<div class="alert">
+							<strong> لا يوجد تعليقات لهذا الاعلان .</strong>
+						</div>
+
+
+					</div>
+				}
+
+
+
+

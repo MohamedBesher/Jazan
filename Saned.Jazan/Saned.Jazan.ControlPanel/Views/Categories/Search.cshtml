@@ -1,0 +1,132 @@
+﻿@model PagedList.IPagedList<Saned.Jazan.Data.Core.Dtos.CategoryView>
+@using PagedList.Mvc
+@using Saned.Jazan.ControlPanel.Extensions
+
+<div class="row box-body">
+    
+    <label class="col-xs-10">عدد التصنيفات :  @ViewBag.ResultCount </label>
+
+    @*<div class="col-xs-2">
+     @Html.DropDownList("PageSize", new SelectList(new Dictionary<string, int> { { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { onchange = "ChangePageSize(this)", @class = "form-control" })
+
+
+
+    </div>*@
+
+</div>
+
+
+
+
+
+
+
+
+<div class="box-body table-responsive">
+
+    <table id="dtCategoties" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>صورة التصنيف</th>
+            <th>اسم التصنيف</th>
+            <th>تحت تصنيف</th>
+
+            <th>الإعدادات</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var bo in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(@bo.CategoryImage))
+                        {
+                            <a href="@bo.CategoryImage" rel="prettyPhoto[pp_gal]">
+                                <img src="@bo.CategoryImage.Replace("uploads", "uploads/Thumbnails")" onerror="this.onerror = null; this.src = '/Content/dist/img/noimagedefault.jpg'" class="img-circle" width="50" height="50"/>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@bo.CategoryImage">
+                                <img src="/Content/dist/img/noimagedefault.jpg" class="img-circle" width="50" height="50" />
+                            </a>
+                        }
+                    </td>
+                    <td>@bo.CategoryNameAr</td>
+                    <td>@bo.ParentName</td>
+                    
+
+                    <td>
+                        @if (@bo.ParentId == null)
+                        {
+                            <a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("Edit", "Categories", new {id = bo.CategoryId}))" class="btn btn-success"><i title="تعديل" class="fa fa-edit"></i></a>
+                        }
+                        else
+                        {
+                            <a onclick="showPageLoadingSpinner()" title="تعديل" href="@(Url.Action("EditSubCategory", "Categories", new {id = bo.CategoryId}))" class="btn btn-success"><i title="تعديل" class="fa fa-edit"></i></a>
+                        }
+                       
+                        @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                        "DeleteCategory", "Categories", new
+                        {
+                            Id = bo.CategoryId,
+                            Page = ViewBag.Page,
+                            CategoryId = bo.CategoryId
+                        },
+                        new AjaxOptions
+                        {
+                            Confirm = "هل تريد حذف هذا العنصر",
+                            UpdateTargetId = "searchResult",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "POST",
+                            LoadingElementId = "ajaxLoaderDiv",
+                            OnSuccess = "getresult",
+                            OnFailure = "geterrorresult"
+                        },
+                        new { @class = "btn btn-danger", id = @bo.CategoryId })
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+    @Html.PagedListPager(Model,
+        page => Url.Action("Search", new { page = page, CategoryId = ViewBag.CategoryId }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv" ,OnSuccess = "pagingSuccess" }))
+
+</div>
+<script>
+    var getresult = function (data) {
+        if (data.message === "Not Deleted") {
+      
+            NotificationService.displayError("هذا التصنيف لا يمكن حذفه لانه مرتبط بعناصر اخري داخل النظام");
+            initPrettyPhoto();
+            //window.location.reload();
+        } else {
+            NotificationService.displaySuccess("تم الحذف بنجاح");
+            initPrettyPhoto();
+        }
+    };
+
+  
+    function onFailureDeletion(data) {
+
+        NotificationService.displayError("حدث خطأ أثناء الحذف .");
+    }
+    var geterrorresult = function (data) {
+        console.log(data);
+        console.log(data.statusText);
+        if (data.statusText === "Not Deleted") {
+
+            NotificationService.displayError("هذا التصنيف لا يمكن حذفه لانه مرتبط بعناصر اخري داخل النظام");
+            //window.location.reload();
+        } else {
+            NotificationService.displayError("حدث خطأ أثناء الحذف .");
+        }
+    };
+</script>

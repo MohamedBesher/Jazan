@@ -1,0 +1,144 @@
+﻿@model Saned.Jazan.ControlPanel.ViewModels.CategoryFormViewModel
+
+@{
+    ViewBag.Title = "إضافة/تعديل تصنيف رئيس";
+    var imgThum = "";
+    var imgFull = "";
+}
+
+@using (Html.BeginForm(Model.Action, "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @*@Html.AntiForgeryToken()*@
+    @Html.HiddenFor(h => h.Id)
+    @Html.Hidden("ImgId", Model.ImageUrl)
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                إضافة تصنيف
+                <small> الحقول المعلمة بالنجمة ( * ) هي حقول إلزامية</small>
+            </h1>
+            <ol class="breadcrumb">
+
+                <li><a onclick="showPageLoadingSpinner()" href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i>الرئيسية</a></li>
+                <li><a onclick="showPageLoadingSpinner()" href="@Url.Action("Index", "Categories")"><i class="glyphicon glyphicon-tags"></i>التصنيفات </a></li>
+                <li class="active">إضافة تصنيف</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">بيانات التصنيف</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form role="form">
+                                <!-- text input -->
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CategoryNameAr)
+                                        <span class="required">*</span>
+                                        @Html.EditorFor(model => model.CategoryNameAr, new { htmlAttributes = new { @class = "form-control", id = "CategoryNameAr_Name", placeholder = " لا يزيد عن 50 حرفا" } })
+                                        @Html.ValidationMessageFor(model => model.CategoryNameAr, null, new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12 col-xs-12">
+                                    @Html.ValidationMessageFor(model => model.Image, null, new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        
+                                        @Html.LabelFor(model => model.Image)
+
+
+                                        <span class="required">*</span>
+                                        @if (string.IsNullOrWhiteSpace(Model.Image))
+                                        {
+                                            imgThum = "/Content/dist/img/noimagedefault.jpg";
+                                            imgFull = "/Content/dist/img/noimagedefault.jpg";
+                                        }
+                                        else
+                                        {
+                                            imgThum = @Url.Content(Model.Image);
+                                            imgFull = @Url.Content(Model.Image);
+                                            imgThum = imgThum.Replace("uploads", "uploads/Thumbnails");
+                                        }
+                                        <a id="linkPhoto" href="@imgFull" rel="prettyPhoto">
+                                            <img id="imgPhoto" class="img-circle" width="100" height="100" alt="الصورة " src="@imgThum" onerror="this.onerror = null; this.src = '/Content/dist/img/noimagedefault.jpg'" />
+                                        </a>
+
+                                        <input id="input-700" name="kartik-input-700[]" type="file" accept="image/*" class="file-loading">
+                                        <div id="errorBlock" class="help-block"></div>
+                                       
+                                        @Html.HiddenFor(model => model.Image, new {id = "txtImgUrl"})
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-xs-12">
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-success sweet">حفظ</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+}
+@section scripts{}
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+   
+    //Photo
+    $(document).ready(function () {
+
+        $("#input-700").fileinput({
+            uploadUrl: "/api/Uploader/SaveFile/" + 1, // server upload action
+            showPreview: false,
+            language: 'ar',
+            maxFileSize: 200,
+            allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
+            maxFileCount: 1,
+            maxImageWidth: 200,
+            maxImageHeight: 150,
+            resizePreference: 'height',
+            resizeImage: true,
+            dropZoneEnabled: false,
+            elErrorContainer: "#errorBlock"
+
+        }).on('filebatchpreupload', function (event, data, id, index) {
+            console.log("filebatchpreupload" + data);
+        }).on('fileuploaded', function (event, data, id, index) {
+
+            console.log(data.response);
+
+            document.getElementById("linkPhoto").href = "/" + data.response;
+            document.getElementById("imgPhoto").src = "/" + data.response.replace("uploads", "uploads/Thumbnails") + "#" + new Date().getTime();
+            document.getElementById("txtImgUrl").value = "/" + data.response + "#" + new Date().getTime();
+
+        }).on('fileuploaderror', function (event, data, id, index) {
+
+            console.log("ERROR" + data);
+
+
+
+        });
+    });
+
+</script>

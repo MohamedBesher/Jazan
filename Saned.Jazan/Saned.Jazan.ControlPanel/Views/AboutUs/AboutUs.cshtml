@@ -1,0 +1,160 @@
+﻿@using System.Web.UI.WebControls
+@model Saned.Jazan.ControlPanel.ViewModels.MobileSettingViewModel
+
+@{
+    ViewBag.Title = "إضافة خبر";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+
+}
+
+
+@*@using (Ajax.BeginForm("AboutUs", options))*@
+ @using (Html.BeginForm("AboutUs", "AboutUs", FormMethod.Post))
+
+    {
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                معلومات الاتصال
+                <small> الحقول المعلمة بالنجمة ( * ) هي حقول إلزامية</small>
+            </h1>
+            <ol class="breadcrumb">
+
+                <li><a onclick="showPageLoadingSpinner()" href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i>الرئيسية</a></li>
+                <li class="active"><i class="fa fa-phone"></i>معلومات الاتصال</li>
+
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">معلومات الاتصال </h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+                            <!-- text input -->
+
+
+
+
+                         
+
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.AboutUs)
+                                       
+                                    <span class="required">*</span>                                  
+                                    @Html.TextAreaFor(model => model.AboutUs, new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا", @rows = 5 })                                                                      
+                                    @Html.ValidationMessageFor(model => model.AboutUs, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CompitionConditions)
+
+                                    <span class="required">*</span>
+                                    @Html.TextAreaFor(model => model.CompitionConditions, new { @class = "form-control", placeholder = " لا يزيد عن 500 حرفا", @rows = 7 })
+                                    @Html.ValidationMessageFor(model => model.CompitionConditions, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            
+
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MobileNumber)
+
+                                    <span class="required">*</span>
+                                    @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 12 رقم" } })
+                                    @Html.ValidationMessageFor(model => model.MobileNumber, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Line)
+
+                                    <span class="required">*</span>
+                                    @Html.EditorFor(model => model.Line, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+                                    @Html.ValidationMessageFor(model => model.Line, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Twitter)
+
+                                    <span class="required">*</span>
+                                    @Html.EditorFor(model => model.Twitter, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+                                    @Html.ValidationMessageFor(model => model.Twitter, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Instgram)
+
+                                    <span class="required">*</span>
+                                    @Html.EditorFor(model => model.Instgram, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+                                    @Html.ValidationMessageFor(model => model.Instgram, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Snapchat)
+
+                                    <span class="required">*</span>
+                                    @Html.EditorFor(model => model.Snapchat, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+                                    @Html.ValidationMessageFor(model => model.Snapchat, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BlackBerry)
+
+                                    <span class="required">*</span>
+                                    @Html.EditorFor(model => model.BlackBerry, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+                                    @Html.ValidationMessageFor(model => model.BlackBerry, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email)
+
+                                    <span class="required">*</span>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+                                    @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                           <div class="col-xs-12 col-xs-12">
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-success sweet">حفظ</button>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+}
+@section scripts{}
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+

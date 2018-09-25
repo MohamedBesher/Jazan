@@ -1,0 +1,172 @@
+﻿
+@model Saned.Jazan.Data.Core.Models.Advertisement
+<div id="Ads-Details">
+    <div class="box box-solid">
+        <div class="box-header with-border">
+
+            <div class="col-xs-6">
+                <div class="box-body">
+
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CityName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CityName)
+                        </dd>
+
+                        <dt>
+                            تصنيف الأعلان
+                        </dt>
+
+                        <dd>
+                            @Model.Category.CategoryNameAr
+                        </dd>
+
+                        <dt>
+                            باقة الأعلان
+                        </dt>
+
+                        <dd>
+                            @Model.Package.ArabicName
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+
+
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Mobile)
+                        </dt>
+
+                        <dd>
+
+                            @(!string.IsNullOrEmpty(Model.Mobile) ? Model.Mobile : "غير محدد")
+
+
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @(!string.IsNullOrEmpty(Model.Email) ? Model.Email : "غير محدد")
+
+
+
+
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.WebSite)
+                        </dt>
+
+                        <dd>
+                            @(!string.IsNullOrEmpty(Model.WebSite) ? Model.WebSite : "غير محدد")
+
+
+
+
+                        </dd>
+
+                     
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IsApproved)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IsApproved)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IsActive)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CreatedOn)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CreatedOn)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CreatedBy)
+                        </dt>
+
+                        <dd>
+                            @Model.CreatedByUser.Name
+
+
+                        </dd>
+
+
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.StartDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.StartDate)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EndDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.EndDate)
+                        </dd>
+
+                    </dl>
+
+                </div>
+            </div>
+            <div class="col-xs-6">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <a href="@(ViewBag.FrontEndUrl + "" + Model.ImageUrl)" rel="prettyPhoto[pp_gal]" class="img-thumbnail">
+                        <img src="@(ViewBag.FrontEndUrl + "" + Model.ImageUrl)" onerror="this.onerror = null;this.src = '/Content/dist/img/noimagedefault.jpg'" class="img-thumbnail" />
+
+                    </a>
+                }
+                @foreach (var image in Model.AdvertisementImages)
+                {
+                    <a href="@(ViewBag.FrontEndUrl + "" + image.ImageUrl)" rel="prettyPhoto[pp_gal]" class="img-thumbnail">
+                        <img src="@(ViewBag.FrontEndUrl + "" + image.ImageUrl)" onerror="this.onerror = null;this.src = '/Content/dist/img/noimagedefault.jpg'" class="img-thumbnail" />
+
+                    </a>
+                }
+
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div><!-- /.box-header -->
+
+
+
+
+</div>
+

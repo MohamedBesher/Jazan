@@ -1,0 +1,16 @@
+﻿Message :An error occurred while updating the entries. See the inner exception for details.<br/>
+StackTrace :   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Saned.Jazan.Data.Persistence.Repositories.UsersRepository.DeleteUser(ApplicationUser selected) in E:\saned\Jazan\Saned.Jazan\Saned.Jazan.Data\Persistence\Repositories\UsersRepository.cs:line 83
+   at Saned.Jazan.ControlPanel.Controllers.UsersController.Delete(UserDeleteObj user) in E:\saned\Jazan\Saned.Jazan\Saned.Jazan.ControlPanel\Controllers\UsersController.cs:line 117
+Date :5/14/2017 5:31:56 PM
+
+-----------------------------------------------------------------------------
+
+Message :Test<br/>
+StackTrace :   at Saned.Jazan.ControlPanel.Controllers.UsersController.Delete(UserDeleteObj user) in E:\saned\Jazan\Saned.Jazan\Saned.Jazan.ControlPanel\Controllers\UsersController.cs:line 122
+Date :5/14/2017 5:53:37 PM
+
+-----------------------------------------------------------------------------
+

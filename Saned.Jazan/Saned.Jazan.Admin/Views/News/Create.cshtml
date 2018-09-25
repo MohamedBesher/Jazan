@@ -1,0 +1,149 @@
+﻿@model Saned.Jazan.Admin.Models.NewsModels
+@{
+    ViewBag.Title = "Create News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="grid-body">
+
+        <div class="form-horizontal">
+            <h4>NewsModels</h4>
+            <hr/>
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+            @Html.HiddenFor(model => model.Id, new {@class = "newsId"})
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "col-sm-2 col-xs-12 control-label"})
+                <div class="col-sm-4 col-xs-12">
+                    @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Details, htmlAttributes: new {@class = "col-sm-2 col-xs-12 control-label"})
+                <div class="col-sm-4 col-xs-12">
+                    @Html.EditorFor(model => model.Details, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Details, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PublishingDate, htmlAttributes: new {@class = "col-sm-2 col-xs-12 control-label"})
+                <div class="col-sm-4 col-xs-12">
+                    @Html.EditorFor(model => model.PublishingDate, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.PublishingDate, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="row">
+                        @{
+
+                            if (Model != null && Model.NewsImagesModel != null)
+                            {
+                                <table>
+                                    @for (int i = 0; i < Model.NewsImagesModel.Count; i++)
+                                    {
+
+                                        Html.RenderAction("_Images", "News", new {newsId = Model.Id, index = i, newsImagesModel = Model.NewsImagesModel[i], modelState = ViewData.ModelState});
+
+                                    }
+                                </table>
+                            }
+                        }
+                    </div>
+                    <br/>
+                    <a id="addLink" class="btn green">Add Image</a>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-6 col-xs-12">
+                    <input type="submit" value="Save" class="btn btn-success pull-right"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+        <script>
+
+
+            $(document).ready(function () {
+                resetControlsIds();
+                // $('#StartDate').datepicker();
+
+            });
+            function getNextRowIndex() {
+                debugger;
+                return $('div.ImageContainer').length;
+            }
+
+
+            $("#addLink").click(function () {
+                debugger;
+                var indx = parseInt(getNextRowIndex());
+                var newsId = $('.newsId').val();
+
+                $("#addLink").attr('disabled', 'disabled');
+                $.ajax({
+                    type: "GET",
+                    block: false,
+                    url: "/News/_Images",
+                    data: { newsId: newsId, index: indx },
+                    success: function (data) {
+                        debugger;
+                        $("#addLink").removeAttr('disabled');
+                        $(data).appendTo($("#addLink").prevAll('div.row'));
+                        $(".removeRow").click(function (e) {
+                            e.preventDefault();
+                            $(this).parents('.ImageContainer').remove();
+                            resetControlsIds();
+                        });
+                        indx++;
+                    },
+                    error: function (data) {
+                        $("#addLink").removeAttr('disabled');
+                    }
+                });
+
+            });
+
+
+
+            function resetControlsIds() {
+                $('div.ImageContainer').each(function (index) {
+
+                    $(this).find("input, select").each(function () {
+
+                        $(this).attr("name", $(this).attr("name").replace(/\[\d+\]/g, "[" + index + "]"));
+                        $(this).attr("id", $(this).attr("id").replace(/\[\d+\]/g, "[" + index + "]"));
+                        //$(this).attr("id", $(this).attr("id").replace(/_\d+_/g, "[" + index + "]"));
+                    });
+
+                    $(this).find("span.help-inline span").each(function () {
+                        $(this).attr("data-valmsg-for", $(this).attr("data-valmsg-for").replace(/\[\d+\]/g, "[" + index + "]"));
+                    });
+                });
+
+            }
+
+
+        </script>
+        @*@section Scripts
+            {
+                @Scripts.Render("~/scripts/jqueryval")
+                <script src="~/Scripts/provision.js"></script>
+            }*@

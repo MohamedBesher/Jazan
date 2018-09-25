@@ -1,0 +1,76 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Saned.Jazan.Data.Core.Models.News>
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="page-title" style="margin-top: 100px">
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6 col-xs-8">
+                <div class="input-group">
+                    <button class="btn btn-default sign" type="button" onclick="window.location.href ='/News/Create/';">Create New</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (Model != null && Model.Any())
+{
+    <div class="row-fluid">
+        <div id="grid-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Details
+                        </th>
+                        <th>
+                            PublishingDate
+                        </th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Details)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PublishingDate)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Create", new {id = item.Id}) |
+                                    @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                                    @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+             

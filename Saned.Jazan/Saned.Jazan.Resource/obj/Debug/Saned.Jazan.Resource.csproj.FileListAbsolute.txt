@@ -1,0 +1,6 @@
+E:\saned\Jazan\Saned.Jazan\Saned.Jazan.Resource\bin\Debug\Saned.Jazan.Resource.dll
+E:\saned\Jazan\Saned.Jazan\Saned.Jazan.Resource\bin\Debug\Saned.Jazan.Resource.pdb
+E:\saned\Jazan\Saned.Jazan\Saned.Jazan.Resource\obj\Debug\Saned.Jazan.Resource.General.resources
+E:\saned\Jazan\Saned.Jazan\Saned.Jazan.Resource\obj\Debug\Saned.Jazan.Resource.csproj.GenerateResource.Cache
+E:\saned\Jazan\Saned.Jazan\Saned.Jazan.Resource\obj\Debug\Saned.Jazan.Resource.dll
+E:\saned\Jazan\Saned.Jazan\Saned.Jazan.Resource\obj\Debug\Saned.Jazan.Resource.pdb

@@ -1,0 +1,142 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Saned.Jazan.Admin.Models.AdvertisementModel>
+
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="page-title" style="margin-top: 100px">
+  
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6 col-xs-8">
+                <div class="input-group">       
+                    <button class="btn btn-default sign" type="button" onclick="window.location.href = '/Advertisement/Create/';">Create New</button>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+
+           
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div id="grid-body">
+
+        <div class="table-responsive">
+            <table id="AdvertisementTable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>CityName</th>
+                        <th>ImageUrl</th>
+                        <th>WorkingHours</th>
+                        <th> Mobile</th>
+                        <th>Email</th>
+                        <th>WebSite</th>
+                        <th>Twitter</th>
+                        <th> FaceBook</th>
+                        <th>Instagram</th>
+                        <th>Snapchat</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr style="">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+    <script>
+        $(document).ready(function () {
+            debugger;
+
+
+            $('#AdvertisementTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/Advertisement/AjaxHandler",
+                "bProcessing": true,
+                "pagingType": "full_numbers",
+                "aoColumns": [
+                    { "sName": "Name" },
+                    { "sName": "CityName" },
+                    { "sName": "ImageUrl" },
+                    { "sName": "WorkingHours" },
+                    { "sName": "Mobile" },
+                    { "sName": "Email" },
+                    { "sName": "WebSite" },
+                    { "sName": "Twitter" },
+                    { "sName": "FaceBook" },
+                    { "sName": "Instagram" },
+                    { "sName": "Snapchat" },
+                    {
+                        "sName": "Id",
+                        "bSearchable": false,
+                        "bSortable": false,
+                        "fnRender": function (oObj) {
+                            return '<a href=\"/Advertisement/Create/' + oObj.aData[11] + '\">Edit</a>';
+                        }
+                    },
+                    {
+                        "sName": "Id",
+                        "bSearchable": false,
+                        "bSortable": false,
+                        "fnRender": function (oObj) {
+                            return '<a href=\"/Advertisement/details/' + oObj.aData[12] + '\">View</a>';
+                        }
+                    },
+                    {
+                        "sName": "Id",
+                        "bSearchable": false,
+                        "bSortable": false,
+                        "fnRender": function (oObj) {
+                            return '<a href="#" onclick=\"delteItem(' + oObj.aData[13] + ')\">Delete</a>';
+                        }
+                    }
+
+                ]
+            });
+        });
+
+
+        function delteItem(id) {
+
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: "/Advertisement/Delete/" + id,
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (error) {
+                    alert(JSON.stringify(error));
+                }
+            });
+        }
+
+
+    </script>

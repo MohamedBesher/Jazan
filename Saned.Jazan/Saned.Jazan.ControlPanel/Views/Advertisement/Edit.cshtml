@@ -1,0 +1,428 @@
+﻿@using Kendo.Mvc.UI
+@model Saned.Jazan.Data.Core.Models.Advertisement
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    @*@Html.Partial("_Flash")*@
+
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+
+            <small> تفاصيل الاعلان</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-dashboard"></i>الرئيسية
+                </a>
+            </li>
+            <li>
+                <a onclick="showPageLoadingSpinner()"
+                   href="@Url.Action("Index", "Advertisement")">
+                    <i class="fa fa-buysellads"></i>الأعلانات
+                </a>
+            </li>
+            <li class="active">تفاصيل الاعلان</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="row">
+                    <div class="box-header">
+                        <div class="col-md-6 col-xs-12">
+                            <h3 class="box-title">
+                                عرض تفاصيل الاعلان
+                            </h3>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <h3 class="box-title pull-right"></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#details">بيانات الاعلان</a></li>
+
+                        <li><a data-toggle="tab" href="#Images">صور الاعلان</a></li>
+                        <li><a data-toggle="tab" href="#Comments">التعليقات</a></li>
+
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="details" class="tab-pane fade in active">
+                            <div id="Ads-Details">
+                                <div class="box box-solid">
+                                    <div class="box-header with-border">
+
+                                        <div class="col-xs-12">
+                                            <div class="box-body">
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.HiddenFor(model => model.Id)
+
+
+                                                        @Html.DisplayNameFor(model => model.Name)
+                                                        <span class="required">*</span>
+
+
+
+                                                        @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control", placeholder = " لا يزيد عن 250 حرفا"}})
+
+                                                        @Html.ValidationMessageFor(model => model.Name, null, new {@class = "text-danger"})
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.CityName)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control", id = "CategoryNameAr_Name", placeholder = " لا يزيد عن 250 حرفا" } })
+                                                        @Html.ValidationMessageFor(model => model.CityName, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.CategoryId)
+                                                        <span class="required">*</span>
+                                                        @Html.DropDownListFor(model => model.CategoryId, ViewData["Categories"] as SelectList, "اختر التصنيف", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.CityName, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label>باقة الأعلان</label>
+
+                                                        <span class="required">*</span>
+                                                        @Model.Package.ArabicName
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Description)
+                                                        <span class="required">*</span>
+                                                        @Html.TextArea("Description", null, new { @class = "form-control", rows = 4, cols = 40 })
+
+
+                                                        @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Latitude)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Longitude)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.WorkingHours)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.WorkingHours, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                        @Html.ValidationMessageFor(model => model.WorkingHours, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Mobile)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                        @Html.ValidationMessageFor(model => model.Mobile, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Email)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.WebSite)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.WebSite, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                        @Html.ValidationMessageFor(model => model.WebSite, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Twitter)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.Twitter, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.FaceBook)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.FaceBook, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Instagram)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.Instagram, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Snapchat)
+                                                        <span class="required">*</span>
+                                                        @Html.EditorFor(model => model.Snapchat, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.IsApproved)
+                                                        <span class="required">*</span>
+                                                        @Html.CheckBoxFor(model => model.IsApproved, new { htmlAttributes = new { @class = "form-control", placeholder = " لا يزيد عن 250 حرفا" } })
+
+                                                        @Html.ValidationMessageFor(model => model.IsApproved, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.StartDate)
+                                                        <span class="required">*</span>
+
+
+                                                                @(Html.Kendo().DatePicker()
+                                                                .Name("StartDate")
+                                                                .Value(Model.StartDate)
+                                                                .HtmlAttributes(new { style = "width: 100%", title = "datepicker", @class = "form-control" })
+                                                        )
+
+                                                        @Html.ValidationMessageFor(model => model.StartDate, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.EndDate)
+                                                        <span class="required">*</span>
+
+
+                                                            @(Html.Kendo().DatePicker()
+                                                            .Name("EndDate")
+                                                            .Value(Model.EndDate)
+                                                            .HtmlAttributes(new { style = "width: 100%", title = "datepicker", @class = "form-control" })
+                                                            )
+
+
+                                                        @Html.ValidationMessageFor(model => model.EndDate, null, new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>
+
+                                        <!-- /.box-body -->
+                                    </div>
+                                </div><!-- /.box-header -->
+
+
+
+
+                            </div>
+                        </div>
+                        <div id="Images" class="tab-pane fade">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+
+
+
+                                    <div class="col-xs-12">
+
+
+
+
+
+                                        <input id="input-25" name="input25[]" type="file" multiple class="file-loading">
+                                        <script>
+                                            var images = [];
+                                            var initialPreviewConfig = [];
+                                            var advertisementId;
+                                            var FrontEndUrl = "";
+                                            @{
+                                                 @:FrontEndUrl='@ViewBag.ApiUrl';
+                                                                                                                                        @:advertisementId=@Model.Id;
+                                                                                                    @:images.push('@(ViewBag.FrontEndUrl + "" + Model.ImageUrl)');
+                                                                                                    @:initialPreviewConfig.push({ caption: "", width: "100px", key: @Model.Id, showDelete: false });
+
+                                                foreach (var image in Model.AdvertisementImages)
+                                                {
+                                                    if (image.ImageUrl.Contains("#Back#"))
+                                                    {
+                                                    @:images.push('@(image.ImageUrl.Replace("#Back#", @ViewBag.BackEndUrl))');
+
+                                                    }
+                                                    else
+                                                    {
+                                                      @:images.push('@(ViewBag.FrontEndUrl + "" + image.ImageUrl)');
+
+                                                    }
+
+@:initialPreviewConfig.push({ caption: "", width: "100px", key: @image.Id, showDelete: true });
+
+}
+
+                                                }
+
+
+                                            $(document).on('ready', function () {
+                                                $("#input-25").fileinput({
+                                                    uploadUrl: "/api/Uploader/SaveAdvertisementFiles/" + advertisementId, // server upload action
+                                                    maxFileCount: 5,
+                                                    minFileCount: 1,
+                                                    initialPreview:images,
+                                                    initialPreviewAsData: true,
+                                                    initialPreviewConfig: initialPreviewConfig,
+                                                    allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
+                                                    deleteUrl: "/api/Uploader/DeleteImg",
+                                                    overwriteInitial: false,
+                                                    initialCaption: "صور الاعلان"
+
+
+                                                }).on("filepredelete", function(jqXHR) {
+                                                    var abort = true;
+                                                    if (confirm("هل انت متأكد من انك تريد حذف الصورة ؟")) {
+                                                        abort = false;
+                                                    }
+                                                    return abort; // you can also send any data/object that you can receive on `filecustomerror` event
+                                                });
+
+
+
+                                            });
+                                        </script>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div id="Comments" class="tab-pane fade">
+                                <div id="Ads-Comments" class="box-header with-border">
+                                    @Html.Action("_Comments", new { RelatedId = Model.Id, PageIndex = 1 })
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div>
+
+
+
+                    </div>
+
+
+
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

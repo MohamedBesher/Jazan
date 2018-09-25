@@ -1,0 +1,55 @@
+﻿@model Saned.Jazan.ControlPanel.ViewModels.LoginViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Log in";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link href="~/Content/dist/img/logo.png" rel="icon" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+
+    <link rel="stylesheet" href="~/Content/dist/css/font-awesome.min.css" />
+
+    <link href="~/Content/dist/css/style.css" rel="stylesheet" />
+    <!-- jQuery 2.1.4 -->
+    <script src="~/Content/bootstrap/jquery.1.11.1.min.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="login">
+            <p class="title">
+                <img src="~/Content/dist/img/logo.png" />
+            </p>
+
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @*@Html.AntiForgeryToken()*@
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.TextBoxFor(m => m.UserName, new { placeholder = "اسم المستخدم", type = "text" })
+                <i class="fa fa-user"></i>
+                @Html.ValidationMessageFor(m => m.UserName, "من فضلك ادخل اسم المستخدم", new { @class = "text-danger" })
+
+
+                @Html.PasswordFor(m => m.Password, new { placeholder = "كلمة المرور", type = "password" })
+                <i class="fa fa-key"></i>
+                @Html.ValidationMessageFor(m => m.Password, "من فضلك ادخل الباسورد", new { @class = "text-danger" })
+                
+                <input type="submit" value="تسجيل الدخول" class="btn btn-default submit" />
+
+            }
+
+        </div>
+
+    </div>
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>
